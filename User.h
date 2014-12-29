@@ -20,18 +20,25 @@ class User
 public:
     User();
     ~User();
+    
+    // setters
     void setNbOfGPl(int New);
     void setNbOfGW(int New);
     void setNbOfGL(int New);
+    
+    // getters
     int getNbOfGL()const;
     int getNbOfGPl()const;
     int getNbOfGW()const;
+    
 private:
+    
     int nbOfGPl; // number of games played
     int nbOfGW; // number of games Won
+    
     std::string name;
-    Texture imageVillain;
-    Sprite Villain;
+    Texture possibleAvatars;
+    Sprite avatars;
     
 };
 

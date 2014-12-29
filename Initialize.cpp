@@ -2,7 +2,7 @@
 //  Initialize.cpp
 //  battleeee
 //
-//  Created by Ingy on 12/21/14.
+//  Created by Gadalla on 12/21/14.
 //  Copyright (c) 2014 Ingy. All rights reserved.
 //
 

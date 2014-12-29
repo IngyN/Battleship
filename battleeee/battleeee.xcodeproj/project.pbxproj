@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4105E7A21A517168008EA07B /* Stats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4105E7A01A517168008EA07B /* Stats.cpp */; };
 		BD01ADCB1A21F72900D7679A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD01ADCA1A21F72900D7679A /* main.cpp */; };
 		BD930DC31A472A31007EF3BA /* Initialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD930DC11A472A31007EF3BA /* Initialize.cpp */; };
 		BDBF58DF1A23A48000F5E575 /* Rules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDBF58DD1A23A48000F5E575 /* Rules.cpp */; };
@@ -14,6 +15,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4105E7A01A517168008EA07B /* Stats.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stats.cpp; sourceTree = "<group>"; };
+		4105E7A11A517168008EA07B /* Stats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stats.h; sourceTree = "<group>"; };
 		BD01ADC21A21F72900D7679A /* battleeee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = battleeee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD01ADC61A21F72900D7679A /* battleeee-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "battleeee-Info.plist"; sourceTree = "<group>"; };
 		BD01ADCA1A21F72900D7679A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -85,6 +88,8 @@
 				BDBF58DD1A23A48000F5E575 /* Rules.cpp */,
 				BDBF58DE1A23A48000F5E575 /* Rules.h */,
 				BDBF58E01A23B51200F5E575 /* Welcome.cpp */,
+				4105E7A01A517168008EA07B /* Stats.cpp */,
+				4105E7A11A517168008EA07B /* Stats.h */,
 				BDBF58E11A23B51200F5E575 /* Welcome.h */,
 				BD930DC11A472A31007EF3BA /* Initialize.cpp */,
 				BD930DC21A472A31007EF3BA /* Initialize.h */,
@@ -180,6 +185,7 @@
 				BD930DC31A472A31007EF3BA /* Initialize.cpp in Sources */,
 				BD01ADCB1A21F72900D7679A /* main.cpp in Sources */,
 				BDBF58DF1A23A48000F5E575 /* Rules.cpp in Sources */,
+				4105E7A21A517168008EA07B /* Stats.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

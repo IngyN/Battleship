@@ -29,6 +29,9 @@ public:
     void CattackM();
     void CattackL();
     
+    // to check if he won
+    bool won();
+    
 private:
     User enemy;
     int nbOfShips;

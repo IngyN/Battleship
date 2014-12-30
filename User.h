@@ -25,7 +25,8 @@ public:
     void setNbOfGPl(int New);
     void setNbOfGW(int New);
     void setNbOfGL(int New);
-    
+    void setAvatar(int avPosition);
+    void setAvatarRE (); // sets a random avatar to be used for the enemy
     // getters
     int getNbOfGL()const;
     int getNbOfGPl()const;
@@ -37,8 +38,9 @@ private:
     int nbOfGW; // number of games Won
     
     std::string name;
-    Texture possibleAvatars;
-    Sprite avatars;
+    Texture playerAvatars;
+    Texture enemyAvatars;
+    Sprite avatar;
     
 };
 

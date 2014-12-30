@@ -14,7 +14,10 @@
 class Cell
 {
 public:
-    
+    bool isHit();
+    void hitCell();
+    bool hasShip();
+    void setPosition (int x, int y);
 private:
     bool hit;
     int xpos, ypos;

@@ -13,7 +13,9 @@
 
 class Board
 {
-    
+public:
+    void initializeR(); // initializes the board with ships randomly placed
+private:
 };
 
 #endif /* defined(__battleeee__Board__) */

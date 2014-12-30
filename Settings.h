@@ -21,6 +21,7 @@ public:
     int volume;
     int music;
     string theme;
+    char difficulty;
 
 };
 

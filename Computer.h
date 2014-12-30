@@ -33,6 +33,8 @@ public:
     bool won();
     
 private:
+    Board * enemyB;
+    Board * playerB;
     User enemy;
     int nbOfShips;
     vector <Cell> prev; // stores previous moves

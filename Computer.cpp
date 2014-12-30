@@ -11,6 +11,9 @@
 
 Computer::Computer(Settings * s, Board * player, Board * comp)
 {
+    enemyB=comp;
+    playerB=player;
+
     if(s->difficulty=='H')
     {
         this->initializeH();
@@ -20,7 +23,10 @@ Computer::Computer(Settings * s, Board * player, Board * comp)
         comp->initializeR();
     }
     
-    // get a random avatar and put it to Enemy
+    enemy.setAvatarRE();
+    // get a random avatar and put it to enemy
+    
+    
 }
 
 Computer::~Computer()

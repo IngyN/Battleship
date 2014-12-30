@@ -11,6 +11,8 @@
 
 #include <Ship.h>
 
+// needs overloading > and ==
+
 class Cell
 {
 public:

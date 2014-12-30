@@ -32,7 +32,7 @@ public:
 private:
     User enemy;
     int nbOfShips;
-    Cell prev [4]; // stores previous moves
+    vector <Cell> prev; // stores previous moves
 };
 
 #endif /* defined(__battleeee__Computer__) */

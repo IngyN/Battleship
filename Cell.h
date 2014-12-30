@@ -9,9 +9,17 @@
 #ifndef __battleeee__Cell__
 #define __battleeee__Cell__
 
-#include <stdio.h>
+#include <Ship.h>
+
 class Cell
 {
+public:
+    
+private:
+    bool hit;
+    int xpos, ypos;
+    Ship * s;
+    
     
 };
 #endif /* defined(__battleeee__Cell__) */

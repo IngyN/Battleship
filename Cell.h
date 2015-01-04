@@ -16,12 +16,16 @@
 class Cell
 {
 public:
-    bool isHit();
-    void hitCell();
+    bool isHit(); 
+    bool isMiss(); // Check if a cell that is hit is a miss
+    void hitCell(); // attack the ship and update the boolean "hit" update miss as well
     bool hasShip();
     void setPosition (int x, int y);
+    pair<int, int> getPosition ();
+    bool shipSunk (); // return true if the ship the cell contains is sunk
 private:
-    bool hit;
+    bool hit;// set to false in constructor
+    bool miss; // set to false in constructor
     int xpos, ypos;
     Ship * s;
     

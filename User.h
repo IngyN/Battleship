@@ -18,7 +18,7 @@ using namespace sf;
 class User
 {
 public:
-    User();
+    User(bool e);
     ~User();
     
     // setters

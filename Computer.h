@@ -36,8 +36,11 @@ private:
     Board * enemyB;
     Board * playerB;
     User enemy;
+    bool hunt;
     int nbOfShips;
-    vector <Cell> prev; // stores previous moves
+    vector <Cell> * h;
+    vector <Cell> * v;
+    vector <Cell> * prev; // stores previous moves
 };
 
 #endif /* defined(__battleeee__Computer__) */

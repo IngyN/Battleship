@@ -1,9 +1,12 @@
 
 #include <SFML/Graphics.hpp>
+#include "Cell.h"
+#include <iostream>
 using namespace sf;
 
 int main()
 {
+    
     // Create the main window
     RenderWindow window(sf::VideoMode(800, 600), "hahahahah");
     Font font;

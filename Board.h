@@ -24,7 +24,8 @@ public:
     void attack ( int row, int col); // attacks a cell with the row and column.
     Cell getCell (int r, int c); // retrieve a cell by its row and column
 private:
-         // 2D array
+    Cell B[10][10];  // 2D array
+    Ship SH[10];
 };
 
 #endif /* defined(__battleeee__Board__) */

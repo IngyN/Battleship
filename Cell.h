@@ -10,12 +10,7 @@
 #define __battleeee__Cell__
 
 #include <Ship.h>
-<<<<<<< HEAD
-#include<iostream>
-using namespace std;
-=======
 #include <iostream>
->>>>>>> FETCH_HEAD
 
 // needs overloading > and ==
 using namespace std;

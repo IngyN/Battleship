@@ -18,7 +18,7 @@ using namespace sf;
 class User
 {
 public:
-    User(bool e);
+    User();
     ~User();
     
     // setters
@@ -26,6 +26,7 @@ public:
     void setNbOfGW(int New);
     void setAvatar(int avPosition);
     void setAvatarRE(); // sets a random avatar to be used for the enemy
+    
     // getters
     int getNbOfGL()const;
     int getNbOfGPl()const;

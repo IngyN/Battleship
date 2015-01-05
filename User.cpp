@@ -13,7 +13,7 @@ using namespace std;
 const string enemies = "enemies.png";
 const string players = "players.png";
 
-User::User(bool e)
+User::User()
 {
         if (!enemyAvatars.loadFromFile(enemies.c_str()))
         {

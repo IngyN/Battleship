@@ -10,8 +10,10 @@
 #define __battleeee__Cell__
 
 #include <Ship.h>
+#include <iostream>
 
 // needs overloading > and ==
+using namespace std;
 
 class Cell
 {
@@ -21,7 +23,7 @@ public:
     void hitCell(); // attack the ship and update the boolean "hit" update miss as well
     bool hasShip();
     void setPosition (int x, int y);
-    pair<int, int> getPosition ();
+    pair <int, int> getPosition ();
     bool shipSunk (); // return true if the ship the cell contains is sunk
 private:
     bool hit;// set to false in constructor

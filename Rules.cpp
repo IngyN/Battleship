@@ -8,7 +8,7 @@
 
 #include "Rules.h"
 
-const string BACKGROUND = "background.png";
+const string BACKGROUND = "backgroundRules.png";
 
 Rules :: Rules (RenderWindow * w, Settings S)
 {

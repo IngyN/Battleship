@@ -7,3 +7,7 @@
 //
 
 #include "Ship.h"
+bool Ship :: shipSunk()
+{
+    return (numberHits == size);
+}

@@ -13,7 +13,10 @@
 
 class Ship
 {
-    
+public:
+    bool shipSunk();
+private:
+    int size, numberHits;
 };
 
 #endif /* defined(__battleeee__Ship__) */

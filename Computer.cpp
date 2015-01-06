@@ -49,7 +49,7 @@ void Computer:: CattackH()
 
 void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit is achieved
 {
-    Cell cell;
+    Cell * cell;
     
     if (!this->won())
     {
@@ -67,20 +67,20 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
             playerB->attack(r, c); //attack the cell
             cell = playerB->getCell(r, c); // get the updated cell
             
-            if(!cell.isMiss())
+            if(!cell->isMiss())
             {
                 
                 
-                if(!cell.shipSunk()) // if the ship hunted is sunk reinitialize the h optioins array and v options array
+                if(!cell->shipSunk()) // if the ship hunted is sunk reinitialize the h optioins array and v options array
                 {
 					hunt =true;
                     h->clear();
 					v->clear();
                     // Updating h and v with the possible options for attack
-                    if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
-                        v->push_back(playerB->downCell(cell));
+                    if(playerB->downCell(*cell) != NULL && !playerB->downCell(*cell)->isHit())
+                        v->push_back(*(playerB->downCell(*cell)));
                     
-                    if(playerB->upCell(cell) != NULL && !playerB->upCell(cell)->isHit())
+                    if(playerB->upCell(*cell) != NULL && !playerB->upCell(*cell)->isHit())
                         v->push_back(playerB->upCell(cell));
                     
                     if(playerB->rightCell(cell) != NULL && !playerB->rightCell(cell)->isHit())

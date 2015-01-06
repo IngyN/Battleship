@@ -26,10 +26,10 @@ public:
     Cell* getCell (int r, int c); // retrieve a cell by its row and column
     
     // to get surrounding Cells within the boundaries
-    Cell* upCell(Cell);
-    Cell* downCell(Cell);
-    Cell* rightCell(Cell);
-    Cell* leftCell(Cell);
+    Cell* upCell(Cell *);
+    Cell* downCell(Cell *);
+    Cell* rightCell(Cell *);
+    Cell* leftCell(Cell *);
 private:
     Cell B[10][10];  // 2D array
     Ship SH[10];

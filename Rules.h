@@ -17,7 +17,7 @@ using namespace sf;
 class Rules
 {
 public:
-    Rules(RenderWindow *, Settings);
+    Rules(RenderWindow *, Settings *);
     ~Rules();
     
     void initialize();
@@ -28,7 +28,7 @@ public:
     
 private:
     int width, height;
-    Settings set;
+    Settings * set;
     RenderWindow * name;
     
     // member for every drawable object

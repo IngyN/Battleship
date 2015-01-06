@@ -32,6 +32,11 @@ void Initialize :: gameloop()
     }
 }
 
+void Initialize:: renderScreen()
+{
+    
+}
+
 bool Initialize :: handleEvents()
 {
     bool flag =true; Event event;

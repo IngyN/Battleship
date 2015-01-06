@@ -14,7 +14,7 @@ Computer::Computer(Settings * s, Board * player, Board * comp)
     enemyB=comp;
     playerB=player;
     hunt = false;
-
+    
     if(s->difficulty=='H')
     {
         this->initializeH();
@@ -27,9 +27,6 @@ Computer::Computer(Settings * s, Board * player, Board * comp)
     enemy.setAvatarRE();
     // get a random avatar and put it to enemy
     
-    // initialize vector of previous moves
-    prev= new vector <Cell>;
-
 }
 
 Computer::~Computer()
@@ -40,25 +37,26 @@ Computer::~Computer()
 // initializing for lower levels is random
 void Computer::initializeH()
 {
-
+    
 } // initializing for level hard
 
 // Levels of attacks H for High, M for Medium, L for low
+
 void Computer:: CattackH()
 {
-    // Checkerboard pattern to find ships
+    // Checkerboard pattern to find ships and Hunt mode
 }
 
-void Computer:: CattackM()
+void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit is achieved
 {
     Cell cell;
-    // random if a ship has been sunk
-    if (!hunt)
+    
+    if (!this->won())
     {
-        int r=(rand()%100)/10; int c= (rand()%100)/10;
-        
-        if (!this->won())
+        if (!hunt)
         {
+            int r=(rand()%100)/10; int c= (rand()%100)/10;
+            
             do
             {
                 r=(rand()%100)/10; c= (rand()%100)/10; // board size 10 * 10
@@ -69,94 +67,124 @@ void Computer:: CattackM()
             cell = playerB->getCell(r, c); // get the updated cell
             
             if(!cell.isMiss())
-            { hunt =true; pair <int,int> position = cell.getPosition();}
-            
-            if(cell.shipSunk()) // if the ship hunted is sunk reinitialize the previous moves array
-                prev=new vector <Cell>;
-            
-            else this->prev->push_back(cell); // else add this cell to the previous moves
-        }
-    }
-    // two vectors to update h and v 
-    else // if a ship hasn't been sunk yet, any cell in previous has been hit at least one hit
-    {
-        if(!prev->back().isMiss()) //  if the last was a hit then we search for the previous hit
-        {
-             vector <Cell> prevHits;
-            
-            for(int i=0; i<5; i++)
-                if (!prev->at(prev-> size()-1-i).isMiss())
-                    prevHits.push_back(prev->at(prev-> size()-1-i));
-            
-            if (prevHits.size()>=2) // There's another hit.
             {
-                pair <int,int> position1=prevHits.back().getPosition(); // Position 1 is the most recent
-                pair <int,int> position2=prevHits[prevHits.size()-2].getPosition();
+                hunt =true;
                 
-                if (position1.first==position2.first)
+                if(cell.shipSunk()) // if the ship hunted is sunk reinitialize the h optioins array and v options array
                 {
-                    if(position1.second>position2.second)
-                    {
-                        playerB->attack(position1.second+1, position2.first);
-                        
-                        cell = playerB->getCell(position1.second+1, position2.first); // get the updated cell
-                        
-                        if(cell.shipSunk()) // if the ship hunted is sunk reinitialize the previous moves array
-                        { prev=new vector <Cell>; hunt=false;}
-                        
-                        else this->prev->push_back(cell); // else add this cell to the previous moves
-                    }
+                    h=new vector <Cell>;
+                    v=new vector<Cell>;
                     
-                    else
-                    {
-                        playerB->attack(position1.second-1, position2.first);
-                        
-                        cell = playerB->getCell(position1.second-1, position2.first); // get the updated cell
-                        
-                        if(cell.shipSunk()) // if the ship hunted is sunk reinitialize the previous moves array
-                            { prev=new vector <Cell>; hunt=false;}
-                        
-                        else this->prev->push_back(cell); // else add this cell to the previous moves
-                    }
-                }
-                else // position1.second = position2.second y=y
-                {
-                    if(position1.first>position2.first)
-                    {
-                        playerB->attack(position1.second, position1.first+1);
-                        
-                        cell = playerB->getCell(position1.second, position1.first+1); // get the updated cell
-                        
-                        if(cell.shipSunk()) // if the ship hunted is sunk reinitialize the previous moves array
-                            { prev=new vector <Cell>; hunt=false;}
-                        
-                        else this->prev->push_back(cell); // else add this cell to the previous moves
-                    }
-                    else // position1.first<position2.first
-                    {
-                            playerB->attack(position1.second, position1.first-1);
-                            
-                            cell = playerB->getCell(position1.second, position1.first-1); // get the updated cell
-                            
-                            if(cell.shipSunk()) // if the ship hunted is sunk reinitialize the previous moves array
-                                { prev=new vector <Cell>; hunt=false;}
-                            
-                            else this->prev->push_back(cell); // else add this cell to the previous moves
-                        }
+                    // Updating h and v with the possible options for attack
+                    if(!playerB->downCell(cell).isHit())
+                        v->push_back(playerB->downCell(cell));
+                    
+                    if(!playerB->upCell(cell).isHit())
+                        v->push_back(playerB->upCell(cell));
+                    
+                    if(!playerB->rightCell(cell).isHit())
+                        h->push_back(playerB->rightCell(cell));
+                    
+                    if(!playerB->leftCell(cell).isHit())
+                        h->push_back(playerB->leftCell(cell));
                 }
             }
-
-            else // There's only one hit
-            {
-                
-            }
-            
         }
         
-        else // if the last element is a miss
+        
+        // NOTE: if the attack is a hit then the computer must continue... Recall function?
+        
+        // two vectors to update h and v
+        
+        else // if a ship hasn't been sunk yet, any cell in previous has been hit at least one hit
         {
-            
+            // if the size of one of the vectors h or v is equal to 0 then the ship is in the other direction
+            if(h->size()!=0)
+            {
+                playerB->attack(h->back()); // attack cell
+                
+                // get updated Cell
+                Cell cell=playerB->getCell(h->back().getPosition().second,h->back().getPosition().first);
+                
+                h->pop_back(); // delete the Cell that has been hit
+                
+                if(!cell.shipSunk()) // if the ship searched for is not sunk -> HUNT
+                {
+                    if(!cell.isMiss()) // if the last attack is a miss we dont change anything
+                    {
+                        if(v->size()!=0) // if there is a possibility that the ship hunted is vertical, then update vertical options
+                        {
+                            if(!playerB->upCell(cell).isHit())
+                                v->push_back(playerB->upCell(cell));
+                            
+                            if(!playerB->downCell(cell).isHit())
+                                v->push_back(playerB->downCell(cell));
+                        }
+                        
+                        // add the rightCell and leftCell if they are options
+                        if(!playerB->rightCell(cell).isHit())
+                            h->push_back(playerB->rightCell(cell));
+                        
+                        if(!playerB->leftCell(cell).isHit())
+                            h->push_back(playerB->leftCell(cell));
+                    }
+                    
+                }
+                
+                else // if the ship is sunk stop hunting
+                {
+                    hunt=false;
+                }
+                
+                // If the computer got a hit he continues
+                if(!cell.isMiss())
+                    this->CattackM();
+                
+            }
+            else if(v->size()!=0) // we put else if to explore horizontal options first then vertical options because every time the function is called it must attack only once.
+            {
+                v->back().hitCell();
+                
+                // get updated Cell
+                Cell cell=playerB->getCell(v->back().getPosition().second,v->back().getPosition().first);
+                
+                v->pop_back(); // delete the Cell that has been hit
+                
+                if(!cell.shipSunk()) // if the ship searched for is not sunk -> HUNT
+                {
+                    if(!cell.isMiss()) // if the last attack is a miss we dont change anything
+                    {
+                        if(h->size()!=0) // if there is a possibility that the ship hunted is horizontal, then update horizontal options
+                        {
+                            if(!playerB->rightCell(cell).isHit())
+                                h->push_back(playerB->rightCell(cell));
+                            
+                            if(!playerB->leftCell(cell).isHit())
+                                h->push_back(playerB->leftCell(cell));
+                        }
+                        
+                        // add the upCell and downCell if they are options
+                        if(!playerB->upCell(cell).isHit())
+                            v->push_back(playerB->upCell(cell));
+                        
+                        if(!playerB->downCell(cell).isHit())
+                            v->push_back(playerB->downCell(cell));
+                        
+                    }
+                    
+                }
+                
+                else // if the ship is sunk stop hunting
+                {
+                    hunt=false;
+                }
+                
+                // If the computer got a hit he continues
+                if(!cell.isMiss())
+                    this->CattackM();
+            }
         }
+        
     }
 }
 
@@ -169,16 +197,15 @@ void Computer::CattackL()
         do
         {
             r=(rand()%100)/10; c= (rand()%100)/10; // board size 10 * 10
-        
+            
         }while (playerB->isHit(r,c)); // If this cell was not it before
         
         playerB->attack(r, c); //attack the cell
         Cell cell = playerB->getCell(r, c);
         
-        if(cell.shipSunk()) // if the ship hunted is sunk reinitialize the previous moves array
-            prev=new vector <Cell>;
-        
-        else this->prev->push_back(cell); // else add this cell to the previous moves
+        // If the computer got a hit he continues
+        if(!cell.isMiss()) // if the ship hunted is sunk reinitialize the previous moves array
+            this->CattackL();
     }
 }
 

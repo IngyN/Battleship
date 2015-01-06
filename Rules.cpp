@@ -9,8 +9,12 @@
 #include "Rules.h"
 
 const string BACKGROUND = "backgroundRules.png";
+const string RULES_E = "RulesE.txt";
+const string RULES_F = "RulesF.txt";
+const string RULES_A = "RulesA.txt";
+const string RULES_M = "RulesMusic.ogg";
 
-Rules :: Rules (RenderWindow * w, Settings S)
+Rules :: Rules (RenderWindow * w, Settings *S)
 {
     name= w; set=S;
     initialize();
@@ -19,6 +23,7 @@ Rules :: Rules (RenderWindow * w, Settings S)
 
 void Rules :: initialize()
 {
+    
     // read settings from file / music/ theme/ difficulty
 }
 
@@ -34,6 +39,11 @@ void Rules :: gameloop()
     }
 }
 
+void Rules:: renderScreen()
+{
+    if (set->language== "English")
+    
+}
 bool Rules :: handleEvents()
 {
     bool flag =true; Event event;

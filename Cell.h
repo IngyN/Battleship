@@ -27,6 +27,7 @@ public:
     void setPosition (int x, int y);
     pair <int, int> getPosition ();
     bool shipSunk (); // return true if the ship the cell contains is sunk
+    
 private:
     bool hit;// set to false in constructor
     bool miss; // set to false in constructor

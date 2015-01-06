@@ -55,11 +55,12 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
     {
         if (!hunt)
         {
-            int r=(rand()%100)/10; int c= (rand()%100)/10;
+            int r, c;
             
             do
             {
-                r=(rand()%100)/10; c= (rand()%100)/10; // board size 10 * 10
+                r = rand()%10;
+				c = rand()%10; // board size 10 * 10
                 
             } while (playerB->isHit(r,c)); // If this cell was not it before
             
@@ -68,24 +69,24 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
             
             if(!cell.isMiss())
             {
-                hunt =true;
                 
-                if(cell.shipSunk()) // if the ship hunted is sunk reinitialize the h optioins array and v options array
+                
+                if(!cell.shipSunk()) // if the ship hunted is sunk reinitialize the h optioins array and v options array
                 {
-                    h=new vector <Cell>;
-                    v=new vector<Cell>;
-                    
+					hunt =true;
+                    h->clear();
+					v->clear();
                     // Updating h and v with the possible options for attack
-                    if(!playerB->downCell(cell).isHit())
+                    if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
                         v->push_back(playerB->downCell(cell));
                     
-                    if(!playerB->upCell(cell).isHit())
+                    if(playerB->upCell(cell) != NULL && !playerB->upCell(cell)->isHit())
                         v->push_back(playerB->upCell(cell));
                     
-                    if(!playerB->rightCell(cell).isHit())
+                    if(playerB->rightCell(cell) != NULL && !playerB->rightCell(cell)->isHit())
                         h->push_back(playerB->rightCell(cell));
                     
-                    if(!playerB->leftCell(cell).isHit())
+                    if(playerB->leftCell(cell) != NULL && !playerB->leftCell(cell)->isHit())
                         h->push_back(playerB->leftCell(cell));
                 }
             }

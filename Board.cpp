@@ -23,4 +23,5 @@ void Board :: attack ( int row, int col) // attacks a cell with the row and colu
 {
     
 }
-Cell getCell (int r, int c); // retrieve a cell by its row and column
+
+Cell* getCell (int r, int c); // retrieve a cell by its row and column

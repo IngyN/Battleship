@@ -38,8 +38,8 @@ private:
     User enemy;
     bool hunt;
     int nbOfShips;
-    vector <Cell> * h;// stores possible Cells to attack horizontally
-    vector <Cell> * v;// stores possible Cells to attack vertically
+    vector <Cell*> * h;// stores possible Cells to attack horizontally
+    vector <Cell*> * v;// stores possible Cells to attack vertically
 };
 
 #endif /* defined(__battleeee__Computer__) */

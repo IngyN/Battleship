@@ -77,10 +77,10 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
                     h->clear();
 					v->clear();
                     // Updating h and v with the possible options for attack
-                    if(playerB->downCell(*cell) != NULL && !playerB->downCell(*cell)->isHit())
-                        v->push_back(*(playerB->downCell(*cell)));
+                    if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
+                        v->push_back(playerB->downCell(cell));
                     
-                    if(playerB->upCell(*cell) != NULL && !playerB->upCell(*cell)->isHit())
+                    if(playerB->upCell(cell) != NULL && !playerB->upCell(cell)->isHit())
                         v->push_back(playerB->upCell(cell));
                     
                     if(playerB->rightCell(cell) != NULL && !playerB->rightCell(cell)->isHit())
@@ -99,34 +99,37 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
         
         else // if a ship hasn't been sunk yet, any cell in previous has been hit at least one hit
         {
-            // if the size of one of the vectors h or v is equal to 0 then the ship is in the other direction
-            if(h->size()!=0)
+            bool hitHorizontal = true;
+            if (h->size()>0 && v->size()>0)
             {
-                playerB->attack(h->back()); // attack cell
+                hitHorizontal = rand()%2;
+            }
+            else
+            {
+                hitHorizontal = (h->size()!=0);
+            }
+            // if the size of one of the vectors h or v is equal to 0 then the ship is in the other direction
+            if(hitHorizontal)
+            {
+                int cellIndex = rand() % h->size();
+                playerB->attack((*h)[cellIndex]); // attack cell
                 
                 // get updated Cell
-                Cell cell=playerB->getCell(h->back().getPosition().second,h->back().getPosition().first);
+                Cell  * cell=playerB->getCell((*h)[cellIndex]->getPosition().second,(*h)[cellIndex]->getPosition().first);
                 
-                h->pop_back(); // delete the Cell that has been hit
+                /*h->pop_back();*/ // delete the Cell that has been hit
+                h->erase(h->begin() + cellIndex);
                 
-                if(!cell.shipSunk()) // if the ship searched for is not sunk -> HUNT
+                if(!cell->shipSunk()) // if the ship searched for is not sunk -> HUNT
                 {
-                    if(!cell.isMiss()) // if the last attack is a miss we dont change anything
+                    if(!cell->isMiss()) // if the last attack is a miss we dont change anything
                     {
-                        if(v->size()!=0) // if there is a possibility that the ship hunted is vertical, then update vertical options
-                        {
-                            if(!playerB->upCell(cell).isHit())
-                                v->push_back(playerB->upCell(cell));
-                            
-                            if(!playerB->downCell(cell).isHit())
-                                v->push_back(playerB->downCell(cell));
-                        }
-                        
+                        v->clear();
                         // add the rightCell and leftCell if they are options
-                        if(!playerB->rightCell(cell).isHit())
+                        if(playerB->rightCell(cell) != NULL && !playerB->rightCell(cell)->isHit())
                             h->push_back(playerB->rightCell(cell));
                         
-                        if(!playerB->leftCell(cell).isHit())
+                        if(playerB->leftCell(cell) != NULL && !playerB->leftCell(cell)->isHit())
                             h->push_back(playerB->leftCell(cell));
                     }
                     
@@ -137,40 +140,29 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
                     hunt=false;
                 }
                 
-                // If the computer got a hit he continues
-                if(!cell.isMiss())
-                    this->CattackM();
-                
             }
-            else if(v->size()!=0) // we put else if to explore horizontal options first then vertical options because every time the function is called it must attack only once.
+            else // we put else if to explore horizontal options first then vertical options because every time the function is called it must attack only once.
             {
-                v->back().hitCell();
+                int cellIndex = rand() % v->size();
+                playerB->attack((*v)[cellIndex]); // attack cell
                 
                 // get updated Cell
-                Cell cell=playerB->getCell(v->back().getPosition().second,v->back().getPosition().first);
+                Cell  * cell=playerB->getCell((*v)[cellIndex]->getPosition().second,(*v)[cellIndex]->getPosition().first);
                 
-                v->pop_back(); // delete the Cell that has been hit
+                /*h->pop_back();*/ // delete the Cell that has been hit
+                v->erase(v->begin() + cellIndex);
                 
-                if(!cell.shipSunk()) // if the ship searched for is not sunk -> HUNT
+                if(!cell->shipSunk()) // if the ship searched for is not sunk -> HUNT
                 {
-                    if(!cell.isMiss()) // if the last attack is a miss we dont change anything
+                    if(!cell->isMiss()) // if the last attack is a miss we dont change anything
                     {
-                        if(h->size()!=0) // if there is a possibility that the ship hunted is horizontal, then update horizontal options
-                        {
-                            if(!playerB->rightCell(cell).isHit())
-                                h->push_back(playerB->rightCell(cell));
-                            
-                            if(!playerB->leftCell(cell).isHit())
-                                h->push_back(playerB->leftCell(cell));
-                        }
-                        
+                        h->clear();
                         // add the upCell and downCell if they are options
-                        if(!playerB->upCell(cell).isHit())
-                            v->push_back(playerB->upCell(cell));
-                        
-                        if(!playerB->downCell(cell).isHit())
+                        if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
                             v->push_back(playerB->downCell(cell));
                         
+                        if(playerB->upCell(cell) != NULL && !playerB->upCell(cell)->isHit())
+                            v->push_back(playerB->upCell(cell));
                     }
                     
                 }
@@ -179,10 +171,6 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
                 {
                     hunt=false;
                 }
-                
-                // If the computer got a hit he continues
-                if(!cell.isMiss())
-                    this->CattackM();
             }
         }
         
@@ -202,11 +190,6 @@ void Computer::CattackL()
         }while (playerB->isHit(r,c)); // If this cell was not it before
         
         playerB->attack(r, c); //attack the cell
-        Cell cell = playerB->getCell(r, c);
-        
-        // If the computer got a hit he continues
-        if(!cell.isMiss()) // if the ship hunted is sunk reinitialize the previous moves array
-            this->CattackL();
     }
 }
 

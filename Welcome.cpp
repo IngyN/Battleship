@@ -15,7 +15,8 @@
 Welcome::Welcome (RenderWindow* window)
 {
     this->window = window;
-    
+    initialize();
+    gameloop();
 }
 Welcome::~Welcome ()
 {
@@ -24,20 +25,29 @@ Welcome::~Welcome ()
 
 void Welcome::initialize()
 {
-    string bckg = "/Users/Ingy/Downloads/whatver.jpg";
+    string bckg = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background8.png";
+    string font = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/WelcomeFontTest.ttf";
+    string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/sprites/Enemy/Female/Dragoness.png";
     
-    bgImageTexture.loadFromFile(bckg);
+    mainFont.loadFromFile(font);
+    welcomeText.setFont(mainFont);
+    welcomeText.setString("Helloooooooo");
+    welcomeText.setCharacterSize(30);
+    
+    bgImageTexture.loadFromFile(bckg,IntRect(0, 0, 1600, 2560));
+    bgImageTexture.setSmooth(true);
     bgImage.setTexture(bgImageTexture);
 
-   // characterImageTexture.loadFromFile(bckg);
-    //characterImage.setTexture(characterImageTexture);
+    characterImageTexture.loadFromFile(character);
+    characterImage.setTexture(characterImageTexture);
 
     menuItems.push_back(Text("New Game", mainFont));
     menuItems.push_back(Text("Options", mainFont));
     menuItems.push_back(Text("Rules", mainFont));
     menuItems.push_back(Text("Exit Game", mainFont));
     
-    for (int i=0; i<menuItems.size(); i++) {
+    for (int i=0; i<menuItems.size(); i++)
+    {
         menuItems[i].setColor(Color(255,255,255));
         menuItems[i].setCharacterSize(30);
         menuItems[i].setPosition(700, 300 + 50 * i);
@@ -66,7 +76,10 @@ bool Welcome::handleEvents()
         switch(event.type)
         {
             case Event::KeyPressed:
-                
+                if(event.key.code == Keyboard::Escape)
+                {
+                    o=false;
+                }
                 break;
             case Event::Closed:
                 o=false;
@@ -82,11 +95,13 @@ void Welcome::renderScreen()
     
     window->draw(bgImage);
     window->draw(characterImage);
+    
     for(int i=0; i<menuItems.size(); i++)
     {
         window->draw(menuItems[i]);
     }
     
+    window->draw(welcomeText);
     
     window->display();
 }

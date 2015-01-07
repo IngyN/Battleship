@@ -30,6 +30,7 @@ public:
 private:
     RenderWindow * window;
     Font mainFont;
+    Text welcomeText;
     vector <Text> menuItems;
     
     Sprite bgImage;

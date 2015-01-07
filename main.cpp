@@ -8,7 +8,7 @@ int main()
 {
     
     // Create the main window
-    RenderWindow window(sf::VideoMode(800, 600), "hahahahah");
+    RenderWindow window(sf::VideoMode(2560, 1600), "Welcome");
     
     RenderWindow * w;
     w=&window;

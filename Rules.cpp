@@ -42,8 +42,9 @@ void Rules :: gameloop()
 void Rules:: renderScreen()
 {
     if (set->language== "English")
-    
+        int r=0;
 }
+
 bool Rules :: handleEvents()
 {
     bool flag =true; Event event;

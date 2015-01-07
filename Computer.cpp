@@ -84,7 +84,6 @@ void Computer:: CattackH()
                 if(count>=mode[0].size())
                     one=false;
                 
-                
             }
             else // second checkerboard pattern (the remaining cells)
             {

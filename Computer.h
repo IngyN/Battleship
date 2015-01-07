@@ -41,6 +41,7 @@ private:
     vector <Cell*> * h;// stores possible Cells to attack horizontally
     vector <Cell*> * v;// stores possible Cells to attack vertically
     vector <pair <int,int>> mode [2]; // Checkerboard
+    bool one;// CattackH
     int count;
 };
 

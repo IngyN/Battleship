@@ -42,7 +42,7 @@ Computer::Computer(Settings * s, Board * player, Board * comp)
         }
     
     count =-1;
-    one=true;
+    one=rand()%2;
     
 }
 
@@ -68,40 +68,51 @@ void Computer:: CattackH()
     {
         if (!hunt)
         {
-            
             if (one) // first checkerboard pattern
             {
                 do
                 {
                     count ++;
                     
-                } while (playerB->isHit(mode [0][count].first, mode[0][count].second) && count<mode[0].size()-1); // If this cell was not hit before
+                } while (count<mode[0].size() && playerB->isHit(mode [0][count].first, mode[0][count].second)); // If this cell was not hit before
                 
-                playerB->attack(mode [0][count].first, mode[0][count].second); //attack the cell
-                
-                cell = playerB->getCell(mode [0][count].first, mode[0][count].second); // get the updated cell
-                
-                if(count>=mode[0].size())
+                if(count < mode[0].size())
+                {
+                    playerB->attack(mode [0][count].first, mode[0][count].second); //attack the cell
+                    
+                    cell = playerB->getCell(mode [0][count].first, mode[0][count].second); // get the updated cell
+                }
+                else
+                {
                     one=false;
+                    count = -1;
+                }
                 
             }
-            else // second checkerboard pattern (the remaining cells)
+            
+            if(!one) // second checkerboard pattern (the remaining cells)
             {
                 do
                 {
-                    count --;
+                    count ++;
                     
-                } while (playerB->isHit(mode [1][count].first, mode[1][count].second) && count>0); // If this cell was not hit before
+                } while (count<mode[1].size() && playerB->isHit(mode [1][count].first, mode[1][count].second)); // If this cell was not hit before
                 
-                playerB->attack(mode [1][count].first, mode[1][count].second); //attack the cell
-                
-                cell = playerB->getCell(mode [1][count].first, mode[1][count].second); // get the updated cell
+                if(count < mode[1].size())
+                {
+                    playerB->attack(mode [1][count].first, mode[1][count].second); //attack the cell
+                    
+                    cell = playerB->getCell(mode [1][count].first, mode[1][count].second); // get the updated cell
+                }
+                else
+                {
+                    one=true;
+                    count = -1;
+                }
             }
             
             if(!cell->isMiss())
             {
-                
-                
                 if(!cell->shipSunk()) // if the ship hunted is sunk reinitialize the h options array and v options array
                 {
                     hunt =true;

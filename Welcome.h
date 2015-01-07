@@ -13,21 +13,29 @@
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
+using namespace std;
 
 class Welcome
 {
     
 public:
-    Welcome ();
+    Welcome (RenderWindow *);
     ~Welcome ();
-    void initialize ();
-    void process();
+    void initialize();
+    void gameloop();
+    bool handleEvents();
+    void renderScreen();
+    void update();
     
 private:
-    RenderWindow * wel;
+    RenderWindow * window;
     Font mainFont;
-    Text welcomeText;
+    vector <Text> menuItems;
     
+    Sprite bgImage;
+    Texture bgImageTexture;
     
+    Sprite characterImage;
+    Texture characterImageTexture;
 };
 #endif /* defined(__battleeee__Welcome__) */

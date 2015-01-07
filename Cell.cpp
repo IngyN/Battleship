@@ -49,22 +49,3 @@ bool Cell :: shipSunk () // return true if the ship the cell contains is sunk
 {
     return( s->shipSunk());
 }
-
-Cell Cell ::upCell()
-{
-    
-}
-
-Cell Cell ::downCell()
-{
-    
-}
-
-Cell Cell ::rightCell()
-{
-    
-}
-Cell Cell ::leftCell()
-{
-    
-}

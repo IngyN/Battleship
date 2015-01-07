@@ -40,6 +40,8 @@ private:
     int nbOfShips;
     vector <Cell*> * h;// stores possible Cells to attack horizontally
     vector <Cell*> * v;// stores possible Cells to attack vertically
+    vector <pair <int,int>> mode [2]; // Checkerboard
+    int count;
 };
 
 #endif /* defined(__battleeee__Computer__) */

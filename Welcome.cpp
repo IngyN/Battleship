@@ -27,12 +27,15 @@ void Welcome::initialize()
 {
     string bckg = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background8.png";
     string font = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/WelcomeFontTest.ttf";
-    string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/sprites/Enemy/Female/Dragoness.png";
+    string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Female/ProximaMidnight.png";
     
     mainFont.loadFromFile(font);
     welcomeText.setFont(mainFont);
-    welcomeText.setString("Helloooooooo");
-    welcomeText.setCharacterSize(30);
+    welcomeText.setString("Welcome back");
+    welcomeText.setCharacterSize(45);
+    welcomeText.setStyle(Text::Bold);
+    welcomeText.setColor(Color::Black);
+    welcomeText.setPosition((window->getSize().x)/2-200,140) ;
     
     bgImageTexture.loadFromFile(bckg,IntRect(0, 0, 1600, 2560));
     bgImageTexture.setSmooth(true);
@@ -40,6 +43,7 @@ void Welcome::initialize()
 
     characterImageTexture.loadFromFile(character);
     characterImage.setTexture(characterImageTexture);
+    characterImage.setPosition((window->getSize().x)/2-200, 300);
 
     menuItems.push_back(Text("New Game", mainFont));
     menuItems.push_back(Text("Options", mainFont));
@@ -48,7 +52,7 @@ void Welcome::initialize()
     
     for (int i=0; i<menuItems.size(); i++)
     {
-        menuItems[i].setColor(Color(255,255,255));
+        menuItems[i].setColor(Color::Black);
         menuItems[i].setCharacterSize(30);
         menuItems[i].setPosition(700, 300 + 50 * i);
     }

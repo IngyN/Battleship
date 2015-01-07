@@ -90,7 +90,7 @@ void Computer:: CattackH()
                 
             }
             
-            if(!one) // second checkerboard pattern (the remaining cells)
+            if(!one) // second checkerboard pattern
             {
                 do
                 {
@@ -108,6 +108,8 @@ void Computer:: CattackH()
                 {
                     one=true;
                     count = -1;
+                    CattackH();
+                    return;
                 }
             }
             
@@ -118,6 +120,7 @@ void Computer:: CattackH()
                     hunt =true;
                     h->clear();
                     v->clear();
+                    
                     // Updating h and v with the possible options for attack
                     if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
                         v->push_back(playerB->downCell(cell));

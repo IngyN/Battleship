@@ -8,11 +8,13 @@ int main()
 {
     
     // Create the main window
-    RenderWindow window(sf::VideoMode(2560, 1600), "Welcome");
+    RenderWindow window(sf::VideoMode::getDesktopMode(), "Welcome", Style::Fullscreen);
     
     RenderWindow * w;
     w=&window;
     Welcome  myWindow (w);
+    
+    cout<<window.getSize().x<< window.getSize().y ;
 
     return 0;
 }

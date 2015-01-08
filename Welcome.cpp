@@ -9,8 +9,7 @@
 #include "Welcome.h"
 
 
-
-//hellllooooooo
+// Check last USER for avatar!
 
 Welcome::Welcome (RenderWindow* window)
 {
@@ -25,17 +24,12 @@ Welcome::~Welcome ()
 
 void Welcome::initialize()
 {
-    string bckg = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background8.png";
-    string font = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/WelcomeFontTest.ttf";
-    string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Female/ProximaMidnight.png";
+    string bckg = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
+    string font = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/font1.ttf";
+    string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Enchantress.png";
+    string curs = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor.png";
     
-    mainFont.loadFromFile(font);
-    welcomeText.setFont(mainFont);
-    welcomeText.setString("Welcome back");
-    welcomeText.setCharacterSize(45);
-    welcomeText.setStyle(Text::Bold);
-    welcomeText.setColor(Color::Black);
-    welcomeText.setPosition((window->getSize().x)/2-200,140) ;
+    // Pictures
     
     bgImageTexture.loadFromFile(bckg,IntRect(0, 0, 1600, 2560));
     bgImageTexture.setSmooth(true);
@@ -43,18 +37,43 @@ void Welcome::initialize()
 
     characterImageTexture.loadFromFile(character);
     characterImage.setTexture(characterImageTexture);
-    characterImage.setPosition((window->getSize().x)/2-200, 300);
-
-    menuItems.push_back(Text("New Game", mainFont));
-    menuItems.push_back(Text("Options", mainFont));
-    menuItems.push_back(Text("Rules", mainFont));
-    menuItems.push_back(Text("Exit Game", mainFont));
+    characterImage.setPosition(1160, 30);
+    characterImage.setScale(0.45, 0.45);
+    
+    //Cursor
+    
+    cursorTexture.loadFromFile(curs);
+    cursorTexture.setSmooth(true);
+    cursor.setTexture(cursorTexture);
+    cursor.setPosition(490, 360);
+    cursor.setScale(0.42, 0.38);
+    
+    // Text
+    
+    mainFont.loadFromFile(font);
+    
+    welcomeText.setFont(mainFont);
+    welcomeText.setString("WELCOME");
+    welcomeText.setCharacterSize(60);
+    welcomeText.setColor(Color(10,15,80));
+    welcomeText.setPosition((window->getSize().x)/2-135,230) ;
+    
+    signedIn.setFont(mainFont);
+    signedIn.setString("SIGNED IN AS");
+    signedIn.setCharacterSize(25);
+    signedIn.setPosition(965, 35);
+    signedIn.setColor(Color(10,15,80));
+    
+    menuItems.push_back(Text("NEW GAME", mainFont));
+    menuItems.push_back(Text("OPTIONS", mainFont));
+    menuItems.push_back(Text("RULES", mainFont));
+    menuItems.push_back(Text("EXIT GAME", mainFont));
     
     for (int i=0; i<menuItems.size(); i++)
     {
-        menuItems[i].setColor(Color::Black);
-        menuItems[i].setCharacterSize(30);
-        menuItems[i].setPosition(700, 300 + 50 * i);
+        menuItems[i].setColor(Color(10,15,80));
+        menuItems[i].setCharacterSize(40);
+        menuItems[i].setPosition(530, 350 + 60 * i);
     }
     
     
@@ -84,6 +103,20 @@ bool Welcome::handleEvents()
                 {
                     o=false;
                 }
+                if(event.key.code == Keyboard::Down && cursor.getPosition().y <= menuItems.back().getPosition().y)
+                {
+                    cursor.setPosition(cursor.getPosition().x, cursor.getPosition().y+60);
+                }
+                if(event.key.code == Keyboard::Up && cursor.getPosition().y >= menuItems[1].getPosition().y)
+                {
+                    cursor.setPosition(cursor.getPosition().x, cursor.getPosition().y-60);
+                }
+                if (event.key.code == Keyboard::Return && cursor.getPosition().y == 360+(menuItems.size()-1)*60 )
+                {
+                    o=false;
+                }
+                // c = (c + 1) % n;
+                // c = (c - 1 + n)%n;
                 break;
             case Event::Closed:
                 o=false;
@@ -97,14 +130,22 @@ void Welcome::renderScreen()
 {
     window->clear();
     
+    // Drawing pictures
+    
     window->draw(bgImage);
     window->draw(characterImage);
+    
+    //Drawing cursor
+    
+    window->draw(cursor);
+    
+    // Drawing Text
     
     for(int i=0; i<menuItems.size(); i++)
     {
         window->draw(menuItems[i]);
     }
-    
+    window->draw(signedIn);
     window->draw(welcomeText);
     
     window->display();

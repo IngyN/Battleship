@@ -13,8 +13,6 @@ int main()
     RenderWindow * w;
     w=&window;
     Welcome  myWindow (w);
-    
-    cout<<window.getSize().x<< window.getSize().y ;
 
     return 0;
 }

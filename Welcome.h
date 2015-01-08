@@ -30,6 +30,8 @@ public:
 private:
     RenderWindow * window;
     Font mainFont;
+    
+    Text signedIn;
     Text welcomeText;
     vector <Text> menuItems;
     
@@ -38,5 +40,8 @@ private:
     
     Sprite characterImage;
     Texture characterImageTexture;
+    
+    Sprite cursor;
+    Texture cursorTexture;
 };
 #endif /* defined(__battleeee__Welcome__) */

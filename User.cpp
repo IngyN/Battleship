@@ -31,8 +31,6 @@ User::User()
         playerAvatars.setSmooth(true);
         playerAvatars.setRepeated(false);
 
-    
-
     name =" ";
 }
 User::~User()

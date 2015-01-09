@@ -81,6 +81,28 @@ void Ship :: setPosition(int rowTop,int colTop,int rowBottom,int colBottom)
     bottom.second=colBottom;
 }
 
+void Ship :: setPosition(int rowTop,int colTop)
+{
+    top.first=rowTop;
+    top.second=colTop;
+    
+    if(horizontal)
+    {
+        top.first=0;
+        top.second =0;
+        bottom.first=top.first;
+        bottom.second=top.second+size-1;
+    }
+    else
+    {
+        top.first=0;
+        top.second =0;
+        bottom.first=top.first+size-1;
+        bottom.second=top.second;
+    }
+    
+}
+
 void Ship::setOrientation (bool horiz)
 {
     if(horiz)
@@ -93,6 +115,8 @@ void Ship::setOrientation (bool horiz)
         bottom.first=top.first+size-1;
         bottom.second=top.second;
     }
+    
+    this->horizontal=horiz;
 }
 
 // getters

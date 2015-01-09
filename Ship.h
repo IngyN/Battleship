@@ -25,6 +25,7 @@ public:
     // setters
     void setSize(int);
     void setPosition(int rowTop,int colTop,int rowBottom,int colBottom);
+    void setPosition(int rowTop,int colTop);
     void setOrientation (bool horiz);
     
     // getters

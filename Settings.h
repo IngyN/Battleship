@@ -10,18 +10,25 @@
 #define battleeee_Settings_h
 
 #include <string>
+#include <SFML/Graphics.hpp>
+
 using namespace std;
+using namespace sf;
 
 class Settings
 {
+    
+    //What shall the default settings be ?
+    
 public:
-    Settings () {};
+    Settings (){};
     ~Settings (){};
     string language;
     int volume;
     int music;
     string theme;
     char difficulty;
+    Font overallFont;
 
 };
 

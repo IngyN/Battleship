@@ -12,7 +12,12 @@ int main()
     
     RenderWindow * w;
     w=&window;
-    Welcome  myWindow (w);
+    
+    // Set the settings here
+    
+    Settings * S= new Settings;
+    S->language="English";
+    Welcome  myWindow (w, S);
 
     return 0;
 }

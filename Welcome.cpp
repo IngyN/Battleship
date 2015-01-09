@@ -7,13 +7,14 @@
 //
 
 #include "Welcome.h"
-
+#include "Rules.h"
 
 // Check last USER for avatar!
 
-Welcome::Welcome (RenderWindow* window)
+Welcome::Welcome (RenderWindow* window, Settings * s)
 {
     this->window = window;
+    this->set=s;
     initialize();
     gameloop();
 }
@@ -27,7 +28,7 @@ void Welcome::initialize()
     string bckg = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
     string font = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/font1.ttf";
     string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Enchantress.png";
-    string curs = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor.png";
+    string curs = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
     
     // Pictures
     
@@ -49,33 +50,34 @@ void Welcome::initialize()
     cursor.setScale(0.42, 0.38);
     
     // Text
-    
-    mainFont.loadFromFile(font);
-    
-    welcomeText.setFont(mainFont);
-    welcomeText.setString("WELCOME");
-    welcomeText.setCharacterSize(60);
-    welcomeText.setColor(Color(10,15,80));
-    welcomeText.setPosition((window->getSize().x)/2-135,230) ;
-    
-    signedIn.setFont(mainFont);
-    signedIn.setString("SIGNED IN AS");
-    signedIn.setCharacterSize(25);
-    signedIn.setPosition(965, 35);
-    signedIn.setColor(Color(10,15,80));
-    
-    menuItems.push_back(Text("NEW GAME", mainFont));
-    menuItems.push_back(Text("OPTIONS", mainFont));
-    menuItems.push_back(Text("RULES", mainFont));
-    menuItems.push_back(Text("EXIT GAME", mainFont));
-    
-    for (int i=0; i<menuItems.size(); i++)
+    if(set->language=="English") // Load from English file
     {
-        menuItems[i].setColor(Color(10,15,80));
-        menuItems[i].setCharacterSize(40);
-        menuItems[i].setPosition(530, 350 + 60 * i);
+        mainFont.loadFromFile(font);
+        
+        welcomeText.setFont(mainFont);
+        welcomeText.setString("WELCOME");
+        welcomeText.setCharacterSize(60);
+        welcomeText.setColor(Color(10,15,80));
+        welcomeText.setPosition((window->getSize().x)/2-135,230) ;
+        
+        signedIn.setFont(mainFont);
+        signedIn.setString("SIGNED IN AS");
+        signedIn.setCharacterSize(25);
+        signedIn.setPosition(965, 35);
+        signedIn.setColor(Color(10,15,80));
+        
+        menuItems.push_back(Text("NEW GAME", mainFont));
+        menuItems.push_back(Text("OPTIONS", mainFont));
+        menuItems.push_back(Text("RULES", mainFont));
+        menuItems.push_back(Text("EXIT GAME", mainFont));
+        
+        for (int i=0; i<menuItems.size(); i++)
+        {
+            menuItems[i].setColor(Color(10,15,80));
+            menuItems[i].setCharacterSize(40);
+            menuItems[i].setPosition(530, 350 + 60 * i);
+        }
     }
-    
     
 }
 
@@ -114,6 +116,10 @@ bool Welcome::handleEvents()
                 if (event.key.code == Keyboard::Return && cursor.getPosition().y == 360+(menuItems.size()-1)*60 )
                 {
                     o=false;
+                }
+                if (event.key.code == Keyboard::Return && cursor.getPosition().y == 360+(menuItems.size()-2)*60 )
+                {
+                    Rules(this->window, set);
                 }
                 // c = (c + 1) % n;
                 // c = (c - 1 + n)%n;

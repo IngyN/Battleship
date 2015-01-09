@@ -9,7 +9,7 @@
 #ifndef __battleeee__Welcome__
 #define __battleeee__Welcome__
 
-#include <stdio.h>
+#include "Settings.h"
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -19,7 +19,7 @@ class Welcome
 {
     
 public:
-    Welcome (RenderWindow *);
+    Welcome (RenderWindow *, Settings *);
     ~Welcome ();
     void initialize();
     void gameloop();
@@ -28,7 +28,9 @@ public:
     void update();
     
 private:
+    
     RenderWindow * window;
+    Settings * set;
     Font mainFont;
     
     Text signedIn;

@@ -22,6 +22,7 @@ class Player
 {
 public:
     Player(Settings , Board *, Board *);
+    
     ~Player();
     
     //the attack function recieves the coordinates and gets the cell pointer and attacks it on the opponent board

@@ -27,9 +27,20 @@ public:
     void update();
     
 private:
-    int width, height;
-    Settings * set;
+    
+    Settings * S;
     RenderWindow * name;
+    
+    Font titleFont;
+    Text title;
+    Text backText;
+    
+    Texture backTexture;
+    Sprite backImage;
+    
+    Sprite cursor;
+    Texture cursorTexture;
+    int cursorXpos, cursorYpos;
     
     // member for every drawable object
 };

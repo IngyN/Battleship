@@ -81,7 +81,7 @@ bool SettingsW :: handleEvents()
             case Event::KeyPressed:
                 if (event.key.code == Keyboard::Escape)
                 {
-                    name->close();
+                    // name->close(); to be able to come back to the previous page
                     flag=false;
                 }
                 break;

@@ -28,14 +28,14 @@ void Initialize :: gameloop()
     {
         flag=handleEvents();
         update();
-        renderScreen();
+        //renderScreen();
     }
 }
 
-void Initialize:: renderScreen()
-{
-    
-}
+//void Initialize:: renderScreen()
+//{
+//    
+//}
 
 bool Initialize :: handleEvents()
 {

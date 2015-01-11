@@ -23,7 +23,7 @@ class Settings
 public:
     Settings (){};
     ~Settings (){};
-    string language;
+    string language = "english";
     int volume;
     int music;
     string theme;

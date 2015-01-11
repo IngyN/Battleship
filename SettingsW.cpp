@@ -73,7 +73,7 @@ void SettingsW :: initialize()
     pageTitle.setString(temp);
     pageTitle.setCharacterSize(60);
     pageTitle.setColor(Color(10,15,80));
-    pageTitle.setPosition((name->getSize().x)/2-135,230) ;
+    pageTitle.setPosition((name->getSize().x)/2-135,200) ;
     
     getline(settTextFile, temp, ' ');
     languageTitle.setFont(pageFont);
@@ -81,16 +81,111 @@ void SettingsW :: initialize()
     languageTitle.setCharacterSize(60);
     languageTitle.setColor(Color(10,15,80));
     
-    
     while (settTextFile.peek()!=)
     {
         getline(settTextFile, temp, ' ');
         languageOptions.push_back(Text(temp,pageFont));
         
     }
+   
     
-    languageTitle.setPosition((name->getSize().x)/4-135,460);
+    getline(settTextFile, temp, ' ');
+    volumeTitle.setFont(pageFont);
+    volumeTitle.setString(temp);
+    volumeTitle.setCharacterSize(60);
+    volumeTitle.setColor(Color(10,15,80));
     
+    while (settTextFile.peek()!=)
+    {
+        getline(settTextFile, temp, ' ');
+        volumeOptions.push_back(Text(temp,pageFont));
+        
+    }
+    
+    getline(settTextFile, temp, ' ');
+    musicTitle.setFont(pageFont);
+    musicTitle.setString(temp);
+    musicTitle.setCharacterSize(60);
+    musicTitle.setColor(Color(10,15,80));
+    
+    while (settTextFile.peek()!=)
+    {
+        getline(settTextFile, temp, ' ');
+        musicOptions.push_back(Text(temp,pageFont));
+        
+    }
+    
+    getline(settTextFile, temp, ' ');
+    difficultyTitle.setFont(pageFont);
+    difficultyTitle.setString(temp);
+    difficultyTitle.setCharacterSize(60);
+    difficultyTitle.setColor(Color(10,15,80));
+    
+    while (settTextFile.peek()!=)
+    {
+        getline(settTextFile, temp, ' ');
+        difficultyOptions.push_back(Text(temp,pageFont));
+        
+    }
+    
+    getline(settTextFile, temp, ' ');
+    fontTitle.setFont(pageFont);
+    fontTitle.setString(temp);
+    fontTitle.setCharacterSize(60);
+    fontTitle.setColor(Color(10,15,80));
+    
+    while (settTextFile.peek()!=)
+    {
+        getline(settTextFile, temp, ' ');
+        fontOptions.push_back(Text(temp,pageFont));
+        
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    languageTitle.setPosition((name->getSize().x)/2-135,400);
+    for(int i=0; i<languageOptions.size(); i++)
+    {
+        languageOptions[i].setFont(pageFont);
+        languageOptions[i].setColor(Color(10,15,80));
+        languageOptions[i].setCharacterSize(40);
+        languageOptions[i].setPosition((name->getSize().x)/2+100*i, 400);
+    }
+    
+    volumeTitle.setPosition((name->getSize().x)/4-135,600);
+    for(int i=0; i<volumeOptions.size(); i++)
+    {
+        volumeOptions[i].setFont(pageFont);
+        volumeOptions[i].setColor(Color(10,15,80));
+        volumeOptions[i].setCharacterSize(40);
+        volumeOptions[i].setPosition((name->getSize().x)/2+50*i, 600);
+    }
+    
+    musicTitle.setPosition((name->getSize().x)/4-135,800);
+    for(int i=0; i<musicOptions.size(); i++)
+    {
+        musicOptions[i].setFont(pageFont);
+        musicOptions[i].setColor(Color(10,15,80));
+        musicOptions[i].setCharacterSize(40);
+        musicOptions[i].setPosition((name->getSize().x)/2+80*i, 800);    }
+    
+    difficultyTitle.setPosition((name->getSize().x)/4-135,1000);
+    for(int i=0; i<difficultyOptions.size(); i++)
+    {
+        difficultyOptions[i].setFont(pageFont);
+        difficultyOptions[i].setColor(Color(10,15,80));
+        difficultyOptions[i].setCharacterSize(40);
+        difficultyOptions[i].setPosition((name->getSize().x)/2+100*i, 1000);    }
+    
+    fontTitle.setPosition((name->getSize().x)/4-135,1200);
+    for(int i=0; i<fontOptions.size(); i++)
+    {
+        fontOptions[i].setFont(pageFont);
+        fontOptions[i].setColor(Color(10,15,80));
+        fontOptions[i].setCharacterSize(40);
+        fontOptions[i].setPosition((name->getSize().x)/2+100*i, 1200);
+    }
 
 }
 

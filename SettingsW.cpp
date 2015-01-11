@@ -40,15 +40,15 @@ void SettingsW :: initialize()
     string pageTextSource;
     
     if (set->language == "english")
-        pageTextSource = "/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsWEnglish.txt";
+        pageTextSource = "/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsW/SettingsWEnglish.txt";
     else if (set->language == "french")
-        pageTextSource = "/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsWFrench.txt";
+        pageTextSource = "/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsW/SettingsWFrench.txt";
     else if (set->language == "arabic")
-        pageTextSource = "/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsWArabic.txt";
+        pageTextSource = "/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsW/SettingsWArabic.txt";
     
     
-    string bckgrnd = "/Users/Alia/Documents/battleeee/battleeee/data/Images/BackgroundImages/background1.png";
-    string cursorImage = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor.png";
+    string bckgrnd = "/Users/Alia/Documents/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
+    string cursorImage = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor1.png";
     
     bckgrndImageTexture.loadFromFile(bckgrnd,IntRect(0, 0, 1600, 2560));
     bckgrndImageTexture.setSmooth(true);
@@ -75,12 +75,21 @@ void SettingsW :: initialize()
     pageTitle.setColor(Color(10,15,80));
     pageTitle.setPosition((name->getSize().x)/2-135,230) ;
     
-    getline(settTextFile, temp);
+    getline(settTextFile, temp, ' ');
     languageTitle.setFont(pageFont);
     languageTitle.setString(temp);
     languageTitle.setCharacterSize(60);
     languageTitle.setColor(Color(10,15,80));
-    languageTitle.setPosition((name->getSize().x)/2-135,230);
+    
+    
+    while (settTextFile.peek()!=)
+    {
+        getline(settTextFile, temp, ' ');
+        languageOptions.push_back(Text(temp,pageFont));
+        
+    }
+    
+    languageTitle.setPosition((name->getSize().x)/4-135,460);
     
 
 }
@@ -134,7 +143,41 @@ void SettingsW :: renderScreen()
     // Drawing pictures
     
     name->draw(bckgrndImage);
+    name->draw(pageTitle);
+    name->draw(languageTitle);
+    name->draw(volumeTitle);
+    name->draw(musicTitle);
+    name->draw(difficultyTitle);
+    name->draw(fontTitle);
     
+    for(int i=0; i<languageOptions.size(); i++)
+    {
+        name->draw(languageOptions[i]);
+    }
+    
+    for(int i=0; i<volumeOptions.size(); i++)
+    {
+        name->draw(volumeOptions[i]);
+    }
+    
+    for(int i=0; i<musicOptions.size(); i++)
+    {
+        name->draw(musicOptions[i]);
+    }
+    
+    for(int i=0; i<difficultyOptions.size(); i++)
+    {
+        name->draw(difficultyOptions[i]);
+    }
+    
+    for(int i=0; i<fontOptions.size(); i++)
+    {
+        name->draw(fontOptions[i]);
+    }
+    
+    name->draw(cursor);
+    
+    name->display();
 }
 
 void SettingsW :: update()

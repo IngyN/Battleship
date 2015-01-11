@@ -1,6 +1,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Welcome.h"
+#include "SettingsW.h"
 #include <iostream>
 using namespace sf;
 
@@ -8,7 +9,7 @@ int main()
 {
     
     // Create the main window
-    RenderWindow window(sf::VideoMode::getDesktopMode(), "Welcome", Style::Fullscreen);
+    RenderWindow window(sf::VideoMode::getDesktopMode(), "Settings", Style::Fullscreen);
     
     RenderWindow * w;
     w=&window;
@@ -16,8 +17,9 @@ int main()
     // Set the settings here
     
     Settings * S= new Settings;
-    S->language="English";
-    Welcome  myWindow (w, S);
+    S->language="english";
+    SettingsW  myWindow (w, S);
 
+    system("pause");
     return 0;
 }

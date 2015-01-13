@@ -30,6 +30,9 @@ class SettingsW
     Sprite cursor;
     Texture cursorTexture;
     
+    Sprite cursorSec;
+    Texture cursorTextureSec;
+    
     
     Text pageTitle;
     Text languageTitle;

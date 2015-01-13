@@ -48,14 +48,21 @@ void SettingsW :: initialize()
     
     
     string bckgrnd = "/Users/Alia/Documents/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
-    string cursorImage = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor1.png";
+    string cursorImage1 = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor1.png";
+    string cursorImage2 = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor2.png";
     
     bckgrndImageTexture.loadFromFile(bckgrnd,IntRect(0, 0, 1600, 2560));
     bckgrndImageTexture.setSmooth(true);
     bckgrndImage.setTexture(bckgrndImageTexture);
     
     
-    cursorTexture.loadFromFile(cursorImage);
+    cursorTextureSec.loadFromFile(cursorImage2);
+    cursorTextureSec.setSmooth(true);
+    cursorSec.setTexture(cursorTextureSec);
+    cursorSec.setPosition(490, 360);
+    cursorSec.setScale(0.42, 0.38);
+    
+    cursorTexture.loadFromFile(cursorImage1);
     cursorTexture.setSmooth(true);
     cursor.setTexture(cursorTexture);
     cursor.setPosition(490, 360);
@@ -222,7 +229,58 @@ bool SettingsW :: handleEvents()
                 }
                 break;
                 
-                // case ....
+                if(event.key.code == Keyboard::Down && cursor.getPosition().y < fontTitle.getPosition().y)
+                {
+                    cursor.setPosition(cursor.getPosition().x, cursor.getPosition().y+100);
+                }
+                if(event.key.code == Keyboard::Up && cursor.getPosition().y > languageTitle.getPosition().y)
+                {
+                    cursor.setPosition(cursor.getPosition().x, cursor.getPosition().y-100);
+                }
+                
+                
+                if (event.key.code == Keyboard::Return && cursor.getPosition().y ==languageTitle.getPosition().y)
+                {
+                    cursor.setPosition(languageOptions[1].getPosition().x- 20, cursor.getPosition().y);
+                    
+                    switch (event.type)
+                   
+                    {
+                        case Event::KeyPressed:
+                            if(event.key.code == Keyboard::Right && cursor.getPosition().x < fontOptions.back().getPosition().x)
+                            {
+                                cursor.setPosition(cursor.getPosition().x+100, cursor.getPosition().y);
+                            }
+                            if(event.key.code == Keyboard::Left && cursor.getPosition().x > fontOptions.back().getPosition().x)
+                            {
+                                cursor.setPosition(cursor.getPosition().x-100, cursor.getPosition().y);
+                            }
+                            if(event.key.code == Keyboard::Return && cursor.getPosition().x > fontOptions.back().getPosition().x)
+                            {
+                                cursor.setPosition(cursor.getPosition().x-100, cursor.getPosition().y);
+                            }
+                            
+
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                if (event.key.code == Keyboard::Return && cursor.getPosition().y == 360+(menuItems.size()-2)*60 )
+                {
+                    Rules(this->window, set);
+                }
                 
         }
     }

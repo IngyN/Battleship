@@ -56,16 +56,16 @@ void SettingsW :: initialize()
     bckgrndImage.setTexture(bckgrndImageTexture);
     
     
-    cursorTextureSec.loadFromFile(cursorImage2);
-    cursorTextureSec.setSmooth(true);
-    cursorSec.setTexture(cursorTextureSec);
-    cursorSec.setPosition(490, 360);
-    cursorSec.setScale(0.42, 0.38);
+//    cursorTextureSec.loadFromFile(cursorImage2);
+//    cursorTextureSec.setSmooth(true);
+//    cursorSec.setTexture(cursorTextureSec);
+//    cursorSec.setPosition(490, 360);
+//    cursorSec.setScale(0.42, 0.38);
     
     cursorTexture.loadFromFile(cursorImage1);
     cursorTexture.setSmooth(true);
     cursor.setTexture(cursorTexture);
-    cursor.setPosition(490, 360);
+    cursor.setPosition(100, 300);
     cursor.setScale(0.42, 0.38);
     
     
@@ -247,20 +247,20 @@ bool SettingsW :: handleEvents()
                    
                     {
                         case Event::KeyPressed:
-                            if(event.key.code == Keyboard::Right && cursor.getPosition().x < fontOptions.back().getPosition().x)
+                            if(event.key.code == Keyboard::Right && cursor.getPosition().x < languageOptions.back().getPosition().x)
                             {
                                 cursor.setPosition(cursor.getPosition().x+100, cursor.getPosition().y);
                             }
-                            if(event.key.code == Keyboard::Left && cursor.getPosition().x > fontOptions.back().getPosition().x)
+                            if(event.key.code == Keyboard::Left && cursor.getPosition().x > fontOptions[1].getPosition().x)
                             {
                                 cursor.setPosition(cursor.getPosition().x-100, cursor.getPosition().y);
                             }
-                            if(event.key.code == Keyboard::Return && cursor.getPosition().x > fontOptions.back().getPosition().x)
+                            if(event.key.code == Keyboard::Return)
                             {
-                                cursor.setPosition(cursor.getPosition().x-100, cursor.getPosition().y);
+                                ////WE NEED AN ARRAY OR SOMETHING FOR THE LANGUAGE OPTIONS
+                                language = languageOptions[(cursor.getPosition().x-name->getSize().x/2)/100];
+                                cursor.setPosition(languageTitle.getPosition().x - 20, cursor.getPosition().y);
                             }
-                            
-
                             break;
                             
                         default:
@@ -277,10 +277,7 @@ bool SettingsW :: handleEvents()
                 
                 
                 
-                if (event.key.code == Keyboard::Return && cursor.getPosition().y == 360+(menuItems.size()-2)*60 )
-                {
-                    Rules(this->window, set);
-                }
+                
                 
         }
     }

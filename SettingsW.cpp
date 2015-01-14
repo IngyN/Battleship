@@ -258,7 +258,7 @@ bool SettingsW :: handleEvents()
                             if(event.key.code == Keyboard::Return)
                             {
                                 ////WE NEED AN ARRAY OR SOMETHING FOR THE LANGUAGE OPTIONS
-                                language = languageOptions[(cursor.getPosition().x-name->getSize().x/2)/100];
+                                set->language = languageOptions[(cursor.getPosition().x-name->getSize().x/2)/100].getString();
                                 cursor.setPosition(languageTitle.getPosition().x - 20, cursor.getPosition().y);
                             }
                             break;

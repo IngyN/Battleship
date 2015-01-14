@@ -9,7 +9,7 @@ int main()
 {
     
     // Create the main window
-    RenderWindow window(sf::VideoMode::getDesktopMode(), "Settings", Style::Fullscreen);
+    RenderWindow window(sf::VideoMode::getDesktopMode(), "Welcome", Style::Fullscreen);
     
     RenderWindow * w;
     w=&window;
@@ -18,7 +18,7 @@ int main()
     
     Settings * S= new Settings;
     S->language="english";
-    SettingsW  myWindow (w, S);
+    Welcome  myWindow (w, S);
 
     system("pause");
     return 0;

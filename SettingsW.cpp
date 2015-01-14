@@ -54,14 +54,38 @@ void SettingsW :: initialize()
     fontOptions.erase(fontOptions.begin(), fontOptions.end());
     difficultyOptions.erase(difficultyOptions.begin(),difficultyOptions.end());
     
+<<<<<<< HEAD
     string bckgrnd = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
     string cursorImage = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
+=======
+    string bckgrnd = "/Users/Alia/Documents/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
+    string cursorImage1 = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor1.png";
+    string cursorImage2 = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor2.png";
+>>>>>>> FETCH_HEAD
     
     bckgrndImageTexture.loadFromFile(bckgrnd);
     bckgrndImageTexture.setSmooth(true);
     bckgrndImage.setTexture(bckgrndImageTexture);
     
+<<<<<<< HEAD
     pageFont = set->overallFont;
+=======
+    
+//    cursorTextureSec.loadFromFile(cursorImage2);
+//    cursorTextureSec.setSmooth(true);
+//    cursorSec.setTexture(cursorTextureSec);
+//    cursorSec.setPosition(490, 360);
+//    cursorSec.setScale(0.42, 0.38);
+    
+    cursorTexture.loadFromFile(cursorImage1);
+    cursorTexture.setSmooth(true);
+    cursor.setTexture(cursorTexture);
+    cursor.setPosition(100, 300);
+    cursor.setScale(0.42, 0.38);
+    
+    
+    Font pageFont = set->overallFont;
+>>>>>>> FETCH_HEAD
     
     ifstream settTextFile;
     settTextFile.open(pageTextSource);
@@ -494,7 +518,55 @@ bool SettingsW :: handleEvents()
                 
                 break;
                 
-                // case ....
+                if(event.key.code == Keyboard::Down && cursor.getPosition().y < fontTitle.getPosition().y)
+                {
+                    cursor.setPosition(cursor.getPosition().x, cursor.getPosition().y+100);
+                }
+                if(event.key.code == Keyboard::Up && cursor.getPosition().y > languageTitle.getPosition().y)
+                {
+                    cursor.setPosition(cursor.getPosition().x, cursor.getPosition().y-100);
+                }
+                
+                
+                if (event.key.code == Keyboard::Return && cursor.getPosition().y ==languageTitle.getPosition().y)
+                {
+                    cursor.setPosition(languageOptions[1].getPosition().x- 20, cursor.getPosition().y);
+                    
+                    switch (event.type)
+                   
+                    {
+                        case Event::KeyPressed:
+                            if(event.key.code == Keyboard::Right && cursor.getPosition().x < languageOptions.back().getPosition().x)
+                            {
+                                cursor.setPosition(cursor.getPosition().x+100, cursor.getPosition().y);
+                            }
+                            if(event.key.code == Keyboard::Left && cursor.getPosition().x > fontOptions[1].getPosition().x)
+                            {
+                                cursor.setPosition(cursor.getPosition().x-100, cursor.getPosition().y);
+                            }
+                            if(event.key.code == Keyboard::Return)
+                            {
+                                ////WE NEED AN ARRAY OR SOMETHING FOR THE LANGUAGE OPTIONS
+                                set->language = languageOptions[(cursor.getPosition().x-name->getSize().x/2)/100].getString();
+                                cursor.setPosition(languageTitle.getPosition().x - 20, cursor.getPosition().y);
+                            }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 
         }
     }

@@ -23,13 +23,18 @@ class SettingsW
     int width;
     int height;
     Settings * set;
+    bool up, down, right, left;
+    int defaultSize;
+    int count;
     
     Sprite bckgrndImage;
     Texture bckgrndImageTexture;
     
+    bool hidden;
     Sprite cursor;
     Texture cursorTexture;
     
+    Font pageFont;
     
     Text pageTitle;
     Text languageTitle;
@@ -43,7 +48,6 @@ class SettingsW
     vector <Text> musicOptions;
     vector <Text> difficultyOptions;
     vector <Text> fontOptions;
-    
     
     public:
     SettingsW(RenderWindow* , Settings *);

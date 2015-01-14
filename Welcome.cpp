@@ -8,8 +8,10 @@
 
 #include "Welcome.h"
 #include "Rules.h"
+#include "SettingsW.h"
+#include <fstream>
 
-// Check last USER for avatar!
+// Check last USER for avatar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Welcome::Welcome (RenderWindow* window, Settings * s)
 {
@@ -30,12 +32,15 @@ void Welcome::initialize()
     string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Enchantress.png";
     string curs = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
     
+    string sourceE="/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Welcome/WelcomeE.txt";
+    string sourceF="/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Welcome/WelcomeF.txt";
+    
     // Pictures
     
     bgImageTexture.loadFromFile(bckg,IntRect(0, 0, 1600, 2560));
     bgImageTexture.setSmooth(true);
     bgImage.setTexture(bgImageTexture);
-
+    
     characterImageTexture.loadFromFile(character);
     characterImage.setTexture(characterImageTexture);
     characterImage.setPosition(1160, 30);
@@ -50,35 +55,77 @@ void Welcome::initialize()
     cursor.setScale(0.42, 0.38);
     
     // Text
+    
+    mainFont.loadFromFile(font);
+    ifstream textSource;
+    
+    string temp;
+    
+     menuItems.erase(menuItems.begin(), menuItems.end());
+    
     if(set->language=="English") // Load from English file
     {
-        mainFont.loadFromFile(font);
+        textSource.open(sourceE.c_str());
         
-        welcomeText.setFont(mainFont);
-        welcomeText.setString("WELCOME");
-        welcomeText.setCharacterSize(60);
-        welcomeText.setColor(Color(10,15,80));
-        welcomeText.setPosition((window->getSize().x)/2-135,230) ;
+        getline(textSource,temp);
+        welcomeText.setString(temp);
         
-        signedIn.setFont(mainFont);
-        signedIn.setString("SIGNED IN AS");
-        signedIn.setCharacterSize(25);
-        signedIn.setPosition(965, 35);
-        signedIn.setColor(Color(10,15,80));
+        getline(textSource,temp);
+        signedIn.setString(temp);
         
-        menuItems.push_back(Text("NEW GAME", mainFont));
-        menuItems.push_back(Text("OPTIONS", mainFont));
-        menuItems.push_back(Text("RULES", mainFont));
-        menuItems.push_back(Text("EXIT GAME", mainFont));
+        getline(textSource,temp);
+        menuItems.push_back(Text(temp, mainFont));
         
-        for (int i=0; i<menuItems.size(); i++)
-        {
-            menuItems[i].setColor(Color(10,15,80));
-            menuItems[i].setCharacterSize(40);
-            menuItems[i].setPosition(530, 350 + 60 * i);
-        }
+        getline(textSource,temp);
+        menuItems.push_back(Text(temp, mainFont));
+        
+        getline(textSource,temp);
+        menuItems.push_back(Text(temp, mainFont));
+        
+        getline(textSource,temp);
+        menuItems.push_back(Text(temp, mainFont));
+        
     }
     
+    if(set->language=="French") // Load from French file
+    {
+        textSource.open(sourceF.c_str());
+        
+        getline(textSource,temp);
+        welcomeText.setString(temp);
+        
+        getline(textSource,temp);
+        signedIn.setString(temp);
+        
+        getline(textSource,temp);
+        menuItems.push_back(Text(temp, mainFont));
+        
+        getline(textSource,temp);
+        menuItems.push_back(Text(temp, mainFont));
+        
+        getline(textSource,temp);
+        menuItems.push_back(Text(temp, mainFont));
+        
+        getline(textSource,temp);
+        menuItems.push_back(Text(temp, mainFont));
+        
+    }
+    welcomeText.setFont(mainFont);
+    welcomeText.setCharacterSize(60);
+    welcomeText.setColor(Color(10,15,80));
+    welcomeText.setPosition((window->getSize().x)/2-135,230) ;
+    
+    signedIn.setFont(mainFont);
+    signedIn.setCharacterSize(25);
+    signedIn.setPosition(965, 35);
+    signedIn.setColor(Color(10,15,80));
+    
+    for (int i=0; i<menuItems.size(); i++)
+    {
+        menuItems[i].setColor(Color(10,15,80));
+        menuItems[i].setCharacterSize(40);
+        menuItems[i].setPosition(530, 350 + 60 * i);
+    }
 }
 
 void Welcome::gameloop()
@@ -121,6 +168,11 @@ bool Welcome::handleEvents()
                 {
                     Rules(this->window, set);
                 }
+                if (event.key.code == Keyboard::Return && cursor.getPosition().y == 360+(menuItems.size()-3)*60 )
+                {
+                    SettingsW(this->window, set);
+                    initialize();
+                }
                 // c = (c + 1) % n;
                 // c = (c - 1 + n)%n;
                 break;
@@ -159,5 +211,5 @@ void Welcome::renderScreen()
 
 void Welcome::update()
 {
-    
+
 }

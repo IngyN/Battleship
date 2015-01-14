@@ -1,1 +1,0 @@
-SettingsLanguage English French ArabicVolume 1 2 3 4 5Music music1 music2 music3Difficulty Easy Medium HardFont 1 2 3 4 5 6 7 8 9 

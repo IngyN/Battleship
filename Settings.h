@@ -21,14 +21,15 @@ class Settings
     //What shall the default settings be ?
     
 public:
-    Settings (){};
-    ~Settings (){};
-    string language = "english";
+    Settings ();
+    ~Settings ();
+    string language = "English";
     int volume;
     int music;
     string theme;
     char difficulty;
     Font overallFont;
+    // current User??
 
 };
 

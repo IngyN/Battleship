@@ -1,3 +1,0 @@
-/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font1.ttf
-/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/French/font3.ttf
-/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/Arabic/

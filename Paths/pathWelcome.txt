@@ -1,5 +1,0 @@
-/Users/Alia/Documents/battleeee/battleeee/data/Images/BackgroundImages/background3.png
-/Users/Alia/Documents/battleeee/battleeee/data/Images/Avatars/Enemy/Enchantress.png
-/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor1.png
-/Users/Alia/Documents/battleeee/battleeee/data/Text/Welcome/WelcomeE.txt
-/Users/Alia/Documents/battleeee/battleeee/data/Text/Welcome/WelcomeF.txt

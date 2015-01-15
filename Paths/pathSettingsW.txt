@@ -1,5 +1,0 @@
-/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsW/SettingsWE.txt
-/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsW/SettingsWF.txt
-/Users/Alia/Documents/battleeee/battleeee/data/Text/SettingsW/SettingsWA.txt
-/Users/Alia/Documents/battleeee/battleeee/data/Images/BackgroundImages/background3.png
-/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor1.png

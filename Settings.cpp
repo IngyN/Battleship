@@ -15,7 +15,7 @@ Settings::Settings ()
     overallFont.loadFromFile(fontPathE);
     
     //string fontPathA = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font1.ttf";
-    fontPathF = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/French/font1.ttf";
+    fontPathF = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/French/font3.ttf";
     
 }
 Settings::~Settings ()

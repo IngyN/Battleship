@@ -158,7 +158,6 @@ void SettingsW :: initialize()
     {
         settTextFile.unget();
         settTextFile>>temp;
-        for(int i=0; i<temp.size();i++)
         difficultyOptions.push_back(Text(temp,pageFont));
         settTextFile.get(c);
         

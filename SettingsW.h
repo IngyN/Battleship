@@ -34,13 +34,10 @@ class SettingsW
     Sprite cursor;
     Texture cursorTexture;
     
-<<<<<<< HEAD
     Font pageFont;
-=======
-    Sprite cursorSec;
-    Texture cursorTextureSec;
     
->>>>>>> FETCH_HEAD
+    //Sprite cursorSec;
+    //Texture cursorTextureSec;
     
     Text pageTitle;
     Text languageTitle;

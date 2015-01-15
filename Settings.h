@@ -23,12 +23,15 @@ class Settings
 public:
     Settings ();
     ~Settings ();
+    void updateFont();
     string language = "English";
     int volume;
     int music;
     string theme;
     char difficulty;
+    
     Font overallFont;
+    string fontPathF,fontPathE,fontPathA;
     // current User??
 
 };

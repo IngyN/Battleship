@@ -11,11 +11,25 @@
 Settings::Settings ()
 {
     language="English";
-    string fontPath = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/font1.ttf";
-    overallFont.loadFromFile(fontPath);
+    fontPathE = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font1.ttf";
+    overallFont.loadFromFile(fontPathE);
+    
+    //string fontPathA = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font1.ttf";
+    fontPathF = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/French/font1.ttf";
     
 }
 Settings::~Settings ()
 {
     
+}
+
+void Settings:: updateFont()
+{
+    if(language=="English")
+        overallFont.loadFromFile(fontPathE);
+    if(language=="French")
+        overallFont.loadFromFile(fontPathF);
+    if(language=="Arabic")
+        overallFont.loadFromFile(fontPathA);
+        
 }

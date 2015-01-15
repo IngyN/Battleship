@@ -18,15 +18,11 @@ int main()
     // Set the settings here
     
     Settings * S= new Settings;
-<<<<<<< HEAD
+
     S->language="English";
    // SettingsW  myWindow (w, S);
     Welcome myWindow(w,S);
-=======
-    S->language="english";
-    Welcome  myWindow (w, S);
 
->>>>>>> FETCH_HEAD
     system("pause");
     return 0;
 }

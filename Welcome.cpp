@@ -28,7 +28,6 @@ Welcome::~Welcome ()
 void Welcome::initialize()
 {
     string bckg = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
-    string font = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/font1.ttf";
     string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Enchantress.png";
     string curs = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
     
@@ -56,9 +55,8 @@ void Welcome::initialize()
     
     // Text
     
-    mainFont.loadFromFile(font);
     ifstream textSource;
-    
+    mainFont=set->overallFont;
     string temp;
     
      menuItems.erase(menuItems.begin(), menuItems.end());

@@ -1,7 +1,7 @@
-Settings
-Language English French Arabic
-Volume 1 2 3 4 5
-Music music1 music2 music3
-Difficulty Easy Medium Hard
-Font 1 2 3 4 5 6 7 8 9
+SETTINGS
+LANGUAGE ENGLISH FRENCH ARABIC
+VOLUME 1 2 3 4 5
+MUSIC MUSIC1 MUSIC2 MUSIC3
+DIFFICULTY EASY MEDIUM HARD
+FONT 1 2 3 4 5 6 7 8 9
 

@@ -1,0 +1,5 @@
+/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesE.txt
+/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesF.txt
+/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesA.txt
+/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background1.png
+/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor2.png

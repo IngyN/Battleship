@@ -18,7 +18,8 @@ using namespace std;
 class Cell
 {
 public:
-    Cell();
+    Cell();// Constructor
+    Cell(Cell &); // copy constructor
     ~Cell();
     bool isHit(); 
     bool isMiss(); // Check if a cell that is hit is a miss
@@ -27,6 +28,7 @@ public:
     void setPosition (int x, int y);
     pair <int, int> getPosition ();
     bool shipSunk (); // return true if the ship the cell contains is sunk
+    void placeShip(Ship*);
     
 private:
     bool hit;// set to false in constructor

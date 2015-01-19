@@ -12,6 +12,15 @@ Cell :: Cell()
     hit = false;        xpos = 0;  ypos = 0;
     miss = false;       s = NULL;
 }
+
+Cell:: Cell(Cell & rhs)
+{
+    this->hit= rhs.hit;
+    this->xpos = rhs.xpos;  this->ypos = rhs.xpos;
+    this->miss=rhs.miss; this->s=rhs.s; 
+    
+}// copy constructor
+
 Cell :: ~Cell()
 {
     
@@ -47,5 +56,12 @@ pair<int, int> Cell :: getPosition ()
 }
 bool Cell :: shipSunk () // return true if the ship the cell contains is sunk
 {
-    return( s->shipSunk());
+    return(s->shipSunk());
+}
+
+void Cell::placeShip(Ship * p)
+{
+    if(s==NULL)
+        this->s=p;
+    else cout<< "ALREADY HAS SHIP" <<endl;
 }

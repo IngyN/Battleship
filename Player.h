@@ -28,9 +28,6 @@ public:
     //the attack function recieves the coordinates and gets the cell pointer and attacks it on the opponent board
     void attack(int , int);
     
-    
-    
-    
     // to check if he won
     bool won();
     

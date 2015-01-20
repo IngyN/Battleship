@@ -26,13 +26,47 @@ Board::~Board() // Destructor
 {
 }
 
-void Board :: placeShip(int row, int col, int num)
+bool Board :: placeShip(int row, int col, int num)
 {
     Ship * p = nullptr;
     *p= SH[num];
     
-    B[row][col].placeShip(p);
+    bool valid = true;
+    
+    for(int i=-1; i<2; i++)
+        for(int j=-1; j<SH[num].getSize()+1; j++)
+            if(B[row+i][col+j].hasShip())
+                valid=false;
+    
+    if(valid)
+    {
+        B[row][col].placeShip(p);
+        p->setPosition(row, col);
+    }
+    
+    return valid;
 }
+
+bool Board::changePos(int row, int col, int toRow, int toCol)
+{
+    Ship * p= this->getShip(row, col);
+    
+    bool valid;
+    
+    for(int i=-1; i<2; i++)
+        for(int j=-1; j<p->getSize()+1; j++)
+            if(B[toRow+i][toCol+j].hasShip())
+                valid=false;
+    
+    if(!B[toRow][toCol].hasShip())
+    {
+        B[row][col].removeShip();
+        B[toRow][toCol].placeShip(p);
+    }
+    
+    return valid;
+    
+}// change the position of a ship from row, col to toRow, toCol
 
 void Board :: initializeR() // initializes the board with ships randomly placed
 {
@@ -46,7 +80,7 @@ bool Board :: isFinished() // checks if all the ships are hit.
     while(f && i<10)
     {
         for(int j=0; j<10; j++)
-            if(!B[i][j].shipSunk())
+            if(B[i][j].hasShip() && !B[i][j].shipSunk())
                 f=false;
         i++;
     }
@@ -75,6 +109,14 @@ Cell* Board:: getCell (int r, int c)
     
 }// retrieve a cell by its row and column
 
+Ship* Board:: getShip (int r, int c)
+{
+    Ship * y=new Ship;
+    y=B[r][c].getShip();
+    return y;
+    
+}// retrieve a ship by its row and column
+
 Cell* Board::upCell(Cell * p)
 {
     Cell * n = p;
@@ -88,6 +130,7 @@ Cell* Board::downCell(Cell * p)
     * n = B[p->getPosition().second +1][p->getPosition().first];
     return n;
 }
+
 Cell* Board::rightCell(Cell * p)
 {
     Cell * n = p;

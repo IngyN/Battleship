@@ -43,23 +43,36 @@ void Rules :: initialize()
     backTexture.loadFromFile(back);
     backImage.setTexture(backTexture);
     
+    pageFont=S->overallFont;
+    
     if (S->language== "English")
     {
         // open english
-        titleFont.loadFromFile(Tfont);
         
-        title.setFont(titleFont);
+        title.setFont(pageFont);
         title.setCharacterSize(45);
         title.setString("RULES");
         title.setPosition((name->getSize().x)/2-100, 100);
         
-        backText.setFont(titleFont);
+        backText.setFont(pageFont);
         backText.setCharacterSize(40);
         backText.setString("BACK");
         backText.setPosition(90,50);
     }
+    else if(S->language== "French")
+    {
+        title.setFont(pageFont);
+        title.setCharacterSize(45);
+        title.setString(L"RÈGLES DU JEU");
+        title.setPosition((name->getSize().x)/2-100, 100);
+        
+        backText.setFont(pageFont);
+        backText.setCharacterSize(40);
+        backText.setString("REVENIR");
+        backText.setPosition(90,50);
+    }
     
-    cursorTexture.loadFromFile(curs);
+    cursorTexture=this->S->cursorTexture;
     cursor.setTexture(cursorTexture);
     cursor.setPosition(50,backText.getPosition().y+5);
     cursor.setScale(0.42, 0.38);

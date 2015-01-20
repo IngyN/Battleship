@@ -10,7 +10,6 @@
 #define __battleeee__Board__
 
 #include "Cell.h"
-#include <stdio.h>
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
@@ -27,7 +26,9 @@ public:
     void attack ( int row, int col); // attacks a cell with the row and column.
     void attack ( Cell *); // attacks a cell
     Cell* getCell (int r, int c); // retrieve a cell by its row and column
-    void placeShip(int row, int col, int num); // place a ship fron the deck on the board
+    Ship* getShip (int r, int c); // retrieve a ship by its row and column
+    bool placeShip(int row, int col, int num); // place a ship fron the deck on the board
+    bool changePos(int row, int col, int toRow, int toCol); // change the position of a ship
     
     // to get surrounding Cells within the boundaries
     Cell* upCell(Cell *);

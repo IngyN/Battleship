@@ -65,3 +65,13 @@ void Cell::placeShip(Ship * p)
         this->s=p;
     else cout<< "ALREADY HAS SHIP" <<endl;
 }
+
+Ship* Cell::getShip()
+{
+    return s;
+}
+
+void Cell:: removeShip()
+{
+    s=NULL;
+}

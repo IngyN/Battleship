@@ -57,8 +57,10 @@ void SettingsW :: initialize()
     
 //<<<<<<< HEAD
     string bckgrnd = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
-    string cursorImage = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
-//=======
+    
+        string cursorImage = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
+    if(set->language=="French")
+        cursorImage = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor3.png";
 //    string bckgrnd = "/Users/Alia/Documents/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
 //    string cursorImage1 = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor1.png";
 //    string cursorImage2 = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor2.png";
@@ -77,7 +79,7 @@ void SettingsW :: initialize()
 //    cursorSec.setPosition(490, 360);
 //    cursorSec.setScale(0.42, 0.38);
     
-    cursorTexture.loadFromFile(cursorImage);
+    cursorTexture=this->set->cursorTexture;
     cursorTexture.setSmooth(true);
     cursor.setTexture(cursorTexture);
     cursor.setPosition(100, 300);
@@ -91,6 +93,10 @@ void SettingsW :: initialize()
     getline(settTextFile, temp);
     pageTitle.setFont(pageFont);
     pageTitle.setString(temp);
+    
+    if (this->set->language=="French")
+        pageTitle.setString(L"RÉGLAGES");
+    
     pageTitle.setCharacterSize(60);
     pageTitle.setColor(Color(10,15,80));
     pageTitle.setPosition((name->getSize().x)/2-135,150) ;
@@ -110,6 +116,10 @@ void SettingsW :: initialize()
         languageOptions.push_back(Text(temp,pageFont));
         settTextFile.get(c);
     }
+    
+    if (this->set->language=="French")
+        languageOptions[1].setString(L"FRANÇAIS");
+    
     //settTextFile.unget();
     
     //char g=' ';
@@ -149,6 +159,8 @@ void SettingsW :: initialize()
     getline(settTextFile, temp, L' ');
     difficultyTitle.setFont(pageFont);
     difficultyTitle.setString(temp);
+    if(this->set->language=="French")
+        difficultyTitle.setString(L"DIFFICULTÉ");
     difficultyTitle.setCharacterSize(35);
     difficultyTitle.setColor(Color(10,15,80));
     
@@ -162,6 +174,9 @@ void SettingsW :: initialize()
         settTextFile.get(c);
         
     }
+    
+    if(this->set->language=="French")
+        difficultyOptions[2].setString(L"DÉMONIAQUE");
     
     //settTextFile.unget();
     
@@ -288,6 +303,7 @@ bool SettingsW :: handleEvents()
                     {
                         set->language="French";
                         set->updateFont();
+                        set->updateCursor();
                         count=0;
                         initialize();
                     }
@@ -295,6 +311,7 @@ bool SettingsW :: handleEvents()
                     {
                         set->language="English";
                         set->updateFont();
+                        set->updateCursor();
                         count=0;
                         initialize();
                     }
@@ -302,6 +319,7 @@ bool SettingsW :: handleEvents()
                     {
                         set->language ="Arabic";
                         set->updateFont();
+                        set->updateCursor();
                         count=0;
                         initialize();
                     }

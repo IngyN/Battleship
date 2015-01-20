@@ -21,7 +21,7 @@ Player :: ~Player()
     
 }
     
-    //the attack function recieves the coordinates and gets the cell pointer and attacks it on the opponent board
+    //the attack function receives the coordinates and gets the cell pointer and attacks it on the opponent board
 void Player :: attack(int r, int c)
 {
     if (!opponentB->isHit(r,c))
@@ -30,6 +30,9 @@ void Player :: attack(int r, int c)
     }
 }
     
-    
+bool Player::won()
+{
+    return ownB->isFinished();
+}
     
     

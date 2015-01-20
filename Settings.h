@@ -24,7 +24,9 @@ public:
     Settings ();
     ~Settings ();
     void updateFont();
-    string language = "English";
+    void updateCursor();
+    
+    string language;
     int volume;
     int music;
     string theme;
@@ -32,6 +34,9 @@ public:
     
     Font overallFont;
     string fontPathF,fontPathE,fontPathA;
+    
+    Texture cursorTexture;
+    string cursorPathE, cursorPathF, cursorPathA;
     // current User??
 
 };

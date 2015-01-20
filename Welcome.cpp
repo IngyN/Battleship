@@ -47,7 +47,7 @@ void Welcome::initialize()
     
     //Cursor
     
-    cursorTexture.loadFromFile(curs);
+    cursorTexture=this->set->cursorTexture;
     cursorTexture.setSmooth(true);
     cursor.setTexture(cursorTexture);
     cursor.setPosition(490, 360);
@@ -124,6 +124,12 @@ void Welcome::initialize()
         menuItems[i].setCharacterSize(40);
         menuItems[i].setPosition(530, 350 + 60 * i);
     }
+   
+    if(this->set->language=="French")
+   {
+       menuItems[1].setString(L"RÉGLAGES");
+       menuItems[2].setString(L"RÈGLES DU JEU");
+   }
 }
 
 void Welcome::gameloop()

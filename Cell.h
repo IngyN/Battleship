@@ -29,6 +29,8 @@ public:
     pair <int, int> getPosition ();
     bool shipSunk (); // return true if the ship the cell contains is sunk
     void placeShip(Ship*);
+    Ship * getShip();
+    void removeShip();
     
 private:
     bool hit;// set to false in constructor

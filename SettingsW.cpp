@@ -297,7 +297,6 @@ bool SettingsW :: handleEvents()
                 
                 if(event.key.code == Keyboard::Return  && cursor.getPosition().y==languageTitle.getPosition().y+9 && cursor.getPosition().x >= languageOptions[0].getPosition().x-40 && !up)
                 {
-                    cout<< "HERE"<<endl;
                     
                     if(count==1)
                     {

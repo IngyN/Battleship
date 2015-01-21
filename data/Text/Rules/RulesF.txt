@@ -1,17 +1,19 @@
-Les Règles du Jeu
-
-Ce jeu se joue à deux, chacun ayant leurs propres bateaux et leurs propres grilles. L’objectif du jeu est de couler tous les bateaux de l’adversaire avant qu’il ne coule les vôtres.
-Chaque joueur a 10 bateaux: 1 bateau de guerre, 2 , 3, and 4 sous-marins.
-Au début du jeu, il faut disposer ses bateaux sur sa grille sans que deux bateaux se touchent.
+Ce jeu se joue à deux, chacun ayant leurs propres bateaux et leurs propres grilles.
+L’objectif du jeu est de faire couler tous les bateaux de l’adversaire avant qu’il ne fasse couler 
+les vôtres. Chaque joueur a 10 bateaux: 1 bateau de guerre, 2 croiseurs, 3 destroyers, and 4 sous-marins.
+Au début du jeu, il faut disposer ses bateaux sur sa grille sans que deux bateaux ne se touchent.
 Après que les bateaux aient été disposés, le jeu commence.
-À chaque tour, chacun son tour, le joueur et l’adversaire attaquent une case sur la grille de l’autre (sans savoir où sont placés les bateaux de l’adversaire).
-Si un bateau est placé sur la case attaquée par le joueur, elle apparaitra avec un symbole signifiant qu’un bateau a été touché. Lorsque l’adversaire joue, si il touche un bateau, le bateau sur la grille du joueur que le joueur voit apparaitra comme touché.
+
+À chaque tour, chacun son tour, le joueur et l’adversaire attaquent une case sur la grille de l’autre 
+(sans savoir où sont placés les bateaux de l’adversaire).
+Si un bateau est placé sur la case attaquée par le joueur, elle apparaitra avec un symbole signifiant 
+qu’un bateau a été touché. Lorsque l’adversaire joue, s’il touche un bateau, le bateau sur la grille 
+du joueur que le joueur voit apparaitra comme touché.
 
 Lorsque le joueur touche un bateau, il peut rejouer sans que l’adversaire joue.
 
-Lorsque toutes les cases sur lesquelles un bateau était placé sont attaquées, le bateau est coulé et toutes les cases touchant au cases contenant le bateau apparaisse comme étant attaquées.
+Lorsque toutes les cases sur lesquelles un bateau était placé sont attaquées, le bateau est coulé
+et toutes les cases touchant au cases contenant le bateau apparaisse comme étant attaquées.
 
 Si tous les bateaux d’un des deux joueurs sont coulés, alors le jeu est fini et l’adversaire a gagné.
-
-
-board and ships.  1 battleship, 2 cruisers, 3 destroyers, 4 submarines.
+END

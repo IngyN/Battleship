@@ -34,6 +34,8 @@ private:
     Font pageFont;
     Text title;
     Text backText;
+    vector <Text> rules;
+    string textSource;
     
     Texture backTexture;
     Sprite backImage;

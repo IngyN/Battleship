@@ -1,13 +1,21 @@
-The Rules
-
-The game is based on two opponents,each having their on board and ships. The objective is to sink all of the opponent's ships before they sink yours.
+The game is based on two opponents,each having their on board and ships. 
+The objective is to sink all of the opponent's ships before they sink yours.
 Each player has 10 ships: 1 battleship, 2 cruisers, 3 destroyers, and 4 submarines.
-At the beginning of the game the player sets up their board and the computer does too. The player cannot place to ships touching.
+At the beginning of the game the player sets up their board and the computer does too.
+The player cannot place to ships touching.
 After the ships have been positioned, the game begins.
-In each round, the player and the opponent take turns shooting at the grids of each other. If the player’s shot is a "hit", meaning that the player was able to strike an opponent’s ship,  it will be marked as a hit in the tracking grid in order to build up a picture of the opponent's fleet. If the opponent’s shot was a hit, it will be marked as a hit on the player’s grid in the same way.
+In each round, the player and the opponent take turns shooting at the grids of each other.
+If the player’s shot is a "hit", meaning that the player was able to strike an 
+opponent’s ship, it will be marked as a hit in the tracking grid 
+in order to build up a picture of the opponent's fleet. 
+If the opponent’s shot was a hit, it will be marked as a hit on the player’s grid in the same way.
 
-A player takes another shot on the same turn if the player was able to successfully hit an enemy’s ship.
+A player takes another shot on the same turn if the player was able to successfully 
+hit an enemy’s ship.
 
-When all of the squares of a ship have been hit, the ship is sunk (turns red), and the surrounding squares are marked hit as well.
+When all of the squares of a ship have been hit, the ship is sunk (turns red),
+and the surrounding squares are marked hit as well.
 
-If all of a player's ships have been sunk, the game is over and their opponent wins
+If all of a player's ships have been sunk, the game is over and their opponent wins.
+END
+ 

@@ -32,6 +32,8 @@ public:
     int getSize();
     pair <pair<int,int>,pair<int,int>> getPosition() const;
     
+    // booleans
+    bool isH(); //is horizontal
 private:
     
     bool sunk;

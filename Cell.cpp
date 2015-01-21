@@ -45,6 +45,7 @@ bool Cell :: hasShip()
 {
     return (s!=NULL);
 }
+
 void Cell :: setPosition (int x, int y)
 {
     xpos = x;

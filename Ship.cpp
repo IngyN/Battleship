@@ -130,3 +130,10 @@ pair <pair<int,int>,pair<int,int>> Ship ::getPosition() const
 {
     return make_pair(top, bottom);
 }
+
+//Booleans
+
+bool Ship:: isH()
+{
+    return horizontal;
+}

@@ -19,7 +19,8 @@ Board::Board() // Constructor
     SH[4].setSize(2);// Destroyer
     SH[5].setSize(2);// Destroyer
     
-    SH[6].setSize(1);// Submarine
+    for (int i=6; i<10;i++)
+        SH[i].setSize(1);// Submarine
 }
 
 Board::~Board() // Destructor
@@ -33,17 +34,31 @@ bool Board :: placeShip(int row, int col, int num)
     
     bool valid = true;
     
-    for(int i=-1; i<2; i++)
-        for(int j=-1; j<SH[num].getSize()+1; j++)
-            if(B[row+i][col+j].hasShip())
-                valid=false;
+    if (p->isH())
+    { for(int i=-1; i<2; i++)
+            for(int j=-1; j<SH[num].getSize()+1; j++)
+                if(B[row+i][col+j].hasShip())
+                    valid=false;
+    }
+    else
+        for(int i=-1; i<SH[num].getSize()+1; i++)
+            for(int j=-1; j<2; j++)
+                if(B[row+i][col+j].hasShip())
+                    valid=false;
     
     if(valid)
     {
-        B[row][col].placeShip(p);
+        if(p->isH())
+            for (int i=0; i<SH[num].getSize();i++)
+                B[row][col+i].placeShip(p);
+        else
+            for (int i=0; i<SH[num].getSize();i++)
+                B[row+i][col].placeShip(p);
+        
         p->setPosition(row, col);
     }
     
+    else cout << "CANNOT PLACE SHIP";
     return valid;
 }
 
@@ -51,12 +66,20 @@ bool Board::changePos(int row, int col, int toRow, int toCol)
 {
     Ship * p= this->getShip(row, col);
     
-    bool valid;
+    bool valid=true;
     
-    for(int i=-1; i<2; i++)
-        for(int j=-1; j<p->getSize()+1; j++)
-            if(B[toRow+i][toCol+j].hasShip())
-                valid=false;
+    if(p->isH())
+    {
+        for(int i=-1; i<2; i++)
+            for(int j=-1; j<p->getSize()+1; j++)
+                if(B[toRow+i][toCol+j].hasShip())
+                    valid=false;
+    }
+    else
+        for(int i=-1; i<p->getSize()+1; i++)
+            for(int j=-1; j<2; j++)
+                if(B[toRow+i][toCol+j].hasShip())
+                    valid=false;
     
     if(!B[toRow][toCol].hasShip())
     {
@@ -70,8 +93,42 @@ bool Board::changePos(int row, int col, int toRow, int toCol)
 
 void Board :: initializeR() // initializes the board with ships randomly placed
 {
+    int r,c;
+    
+    bool valid; bool h;
+    
+    for( int w=0; w<10; w++)
+    {
+        do
+        {
+            h= rand()%2;
+            r =rand ()%10;
+            c =rand()%10;
+            
+            SH[w].setOrientation(h);
+            
+            if(h)
+            {
+                for(int i=-1; i<2; i++)
+                    for(int j=-1; j<SH[w].getSize()+1; j++)
+                        if(B[r+i][c+j].hasShip())
+                            valid=false;
+            }
+            else
+                for(int i=-1; i<SH[w].getSize()+1; i++)
+                    for(int j=-1; j<2; j++)
+                        if(B[r+i][c+j].hasShip())
+                            valid=false;
+        
+            
+        }while (!valid);
+        
+        SH[w].setPosition(r, c);
+        placeShip(r, c, w);
+    }
     
 }
+
 bool Board :: isFinished() // checks if all the ships are hit.
 {
     bool f=true;

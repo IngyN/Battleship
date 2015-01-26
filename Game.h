@@ -18,6 +18,9 @@ class Game
 public:
     Game();
     ~Game();
+    void start ();
+    void playerTurn();
+    void computerTurn();
     
 private:
 

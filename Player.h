@@ -36,8 +36,6 @@ private:
     Board * ownB;
     User opponent;
     
-    
-    
 };
 
 #endif /* defined(__battleeee__Player__) */

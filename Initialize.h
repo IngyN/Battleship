@@ -17,7 +17,7 @@ using namespace sf;
 class Initialize
 {
 public:
-    Initialize(RenderWindow *, Settings);
+    Initialize(RenderWindow *, Settings *);
     ~Initialize();
     
     void initialize();
@@ -28,7 +28,7 @@ public:
     
 private:
     int width, height;
-    Settings set;
+    Settings* set;
     RenderWindow * name;
     
     // member for every drawable object

@@ -9,6 +9,7 @@
 #include "Welcome.h"
 #include "Rules.h"
 #include "SettingsW.h"
+#include "Initialize.h"
 #include <fstream>
 
 // Check last USER for avatar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -177,6 +178,11 @@ bool Welcome::handleEvents()
                     SettingsW(this->window, set);
                     initialize();
                 }
+                if (event.key.code == Keyboard::Return && cursor.getPosition().y == 360+(menuItems.size()-4)*60 )
+                {
+                    Initialize(this->window, set);
+                }
+
                 // c = (c + 1) % n;
                 // c = (c - 1 + n)%n;
                 break;

@@ -8,7 +8,7 @@
 
 #include "Initialize.h"
 
-Initialize :: Initialize (RenderWindow * w, Settings S)
+Initialize :: Initialize (RenderWindow * w, Settings * S)
 {
     name= w; set=S;
     initialize();

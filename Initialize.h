@@ -27,11 +27,18 @@ public:
     void update();
     
 private:
-    int width, height;
     Settings* set;
     RenderWindow * name;
     
     // member for every drawable object
+    
+    Sprite playerGrid;
+    Texture gridTexture;
+    
+    Sprite backImage;
+    Texture backTexture;
+    
+    
 };
 
 #endif /* defined(__battleeee__Initialize__) */

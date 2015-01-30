@@ -10,8 +10,10 @@
 
 Board::Board() // Constructor
 {
+    cout <<"1";
     SH[0].setSize(4);// Battleship
     
+    cout <<" 2";
     SH[1].setSize(3);// Cruiser
     SH[2].setSize(3);// Cruiser
     
@@ -29,7 +31,7 @@ Board::~Board() // Destructor
 
 bool Board :: placeShip(int row, int col, int num)
 {
-    Ship * p = nullptr;
+    Ship * p;
     *p= SH[num];
     
     bool valid = true;
@@ -101,6 +103,8 @@ void Board :: initializeR() // initializes the board with ships randomly placed
     {
         do
         {
+            valid =true;
+            
             h= rand()%2;
             r =rand ()%10;
             c =rand()%10;
@@ -121,10 +125,12 @@ void Board :: initializeR() // initializes the board with ships randomly placed
                             valid=false;
         
             
-        }while (!valid);
+        } while (!valid);
         
         SH[w].setPosition(r, c);
+        
         placeShip(r, c, w);
+        
     }
     
 }

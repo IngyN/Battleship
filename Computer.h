@@ -32,6 +32,8 @@ public:
     // to check if he won
     bool won();
     
+    bool missed();
+    
 private:
     Board * enemyB;
     Board * playerB;
@@ -43,6 +45,7 @@ private:
     vector <pair <int,int>> mode [2]; // Checkerboard
     bool one;// CattackH
     int count;
+    bool previous;
 };
 
 #endif /* defined(__battleeee__Computer__) */

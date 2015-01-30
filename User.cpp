@@ -10,8 +10,8 @@
 #include <iostream>
 
 using namespace std;
-const string enemies = "enemies.png";
-const string players = "players.png";
+const string enemies = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/avatarE.png";
+const string players = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/avatarP.png";
 
 User::User()
 {
@@ -50,14 +50,14 @@ void User::setNbOfGW(int New)
 
 void User::setAvatar(int avPosition)//!!! check on number of variables needed
 {
-     avatar.setTextureRect(sf::IntRect(32*avPosition, 0, 32, 32)); // depends on the picture used.
+     avatar.setTextureRect(sf::IntRect(200*(avPosition%5), 200*(avPosition/5), 200, 200)); // depends on the picture used.
 }
 void User::setAvatarRE()
 {
     int r = rand()%9+1; // generate a random number according to the number of possible avatars
     
     // then select and avatar depending on the size of the avatar.
-    avatar.setTextureRect(sf::IntRect(32*r, 0, 32, 32));
+    avatar.setTextureRect(sf::IntRect(200*(r%5), 200*(r/5), 200, 200));
     
 }// sets a random avatar to be used for the enemy
 

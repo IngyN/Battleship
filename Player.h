@@ -30,12 +30,13 @@ public:
     
     // to check if he won
     bool won();
+    bool missed();
     
 private:
     Board * opponentB;
     Board * ownB;
     User opponent;
-    
+    bool previous;
 };
 
 #endif /* defined(__battleeee__Player__) */

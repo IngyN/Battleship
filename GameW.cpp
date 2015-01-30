@@ -9,12 +9,16 @@
 #include "GameW.h"
 #include <fstream>
 
-GameW :: GameW (RenderWindow * w, Settings * S)
+GameW :: GameW (RenderWindow * w, Settings * S) :comp(S, &playerB, &computerB), play(*S, &playerB, &computerB)
 {
     name= w;
     this->S=S;
+    
     initialize();
+    
     gameloop();
+    playerT=true;
+    
 }
 
 GameW :: ~ GameW()
@@ -24,58 +28,34 @@ GameW :: ~ GameW()
 void GameW :: initialize()
 {
     // read settings from file / music/ theme/ difficulty
-    
-    const string BACKGROUND = "backgroundRules.png";
-    const string RULES_E = "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesE.txt";
-    const string RULES_F = "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesF.txt";
-    const string RULES_A = "RulesA.txt";
-    const string RULES_M = "RulesMusic.ogg";
-    
-    string Tfont = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font2.ttf";
-    string back = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background7.png";
-    string curs = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor2.png";
-    
-    backTexture.loadFromFile(back);
+    backTexture.loadFromFile("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background2.png");
     backImage.setTexture(backTexture);
     
-    rules.erase(rules.begin(), rules.end());
+    gridTexture.loadFromFile("/Users/Ingy/Downloads/board.png");
+    
+    oppGrid.setTexture(gridTexture);
+    playerGrid.setTexture(gridTexture);
+    playerGrid.setPosition(60,60);
+    oppGrid.setPosition(470, 60);
+    
+    options.erase(options.begin(), options.end());
     ifstream in;
+    in.open("/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesE.txt");
     
     pageFont=S->overallFont;
     //pageFont.loadFromFile(Tfont);
     
+    // just for now
+    //playerB.initializeR();
+    
     if (S->language== "English")
     {
         // open english
-        in.open(RULES_E);
-        title.setFont(pageFont);
-        title.setCharacterSize(50);
-        title.setString("RULES");
-        title.setPosition((name->getSize().x)/2-120, 100);
-        title.setColor(Color(10,15,80));
-        
-        backText.setFont(pageFont);
-        backText.setCharacterSize(40);
-        backText.setString("BACK");
-        backText.setPosition(90,50);
-        backText.setColor(Color(10,15,80));
-        
         
     }
     else if(S->language== "French")
     {
-        in.open(RULES_F);
-        title.setFont(pageFont);
-        title.setCharacterSize(50);
-        title.setString(L"RÈGLES DU JEU");
-        title.setPosition((name->getSize().x)/2-120, 100);
-        title.setColor(Color(10,15,80));
         
-        backText.setFont(pageFont);
-        backText.setCharacterSize(40);
-        backText.setString("REVENIR");
-        backText.setPosition(90,50);
-        backText.setColor(Color(10,15,80));
     }
     
     // Getting the text
@@ -88,27 +68,13 @@ void GameW :: initialize()
             if(isalpha(temp[i]))
                 temp[i]=toupper(temp[i]);
         
-        rules.push_back(Text(temp, pageFont));
+        options.push_back(Text(temp, pageFont));
         getline (in, temp);
         
     }while(temp!="END");
     
     in.close();
     
-    for(int i=0; i<rules.size();i++)
-    {
-        rules[i].setPosition(50, 200+30*i);
-        rules[i].setCharacterSize(22);
-        rules[i].setScale(0.92, 1);
-        rules[i].setColor(Color::White);
-    }
-    
-    cursorTexture=this->S->cursorTexture;
-    cursor.setTexture(cursorTexture);
-    cursor.setPosition(50,backText.getPosition().y+5);
-    cursor.setScale(0.42, 0.38);
-    cursorXpos = cursor.getPosition().x;
-    cursorYpos =cursor.getPosition().y; // text +5
 }
 
 void GameW :: gameloop()
@@ -129,18 +95,21 @@ void GameW:: renderScreen()
     
     // pictures
     name->draw(backImage);
+    name->draw(oppGrid);
+    name->draw(playerGrid);
+    //    //Text
+    //    name->draw(title);
+    //    name->draw(backText);
+    //
+    //    for(int i=0; i<rules.size();i++)
+    //    {
+    //        name->draw(rules[i]);
+    //    }
+    //
+    //    //cursor
+    //    name->draw(cursor);
     
-    //Text
-    name->draw(title);
-    name->draw(backText);
     
-    for(int i=0; i<rules.size();i++)
-    {
-        name->draw(rules[i]);
-    }
-    
-    //cursor
-    name->draw(cursor);
     this->name->display();
 }
 
@@ -166,6 +135,32 @@ bool GameW :: handleEvents()
                 {
                     flag=false;
                 }
+            case Event::MouseButtonPressed:
+                if(Mouse::isButtonPressed(Mouse::Left)&&playerT)
+                {
+                    if (m.getPosition().x>oppGrid.getPosition().x && m.getPosition().x<oppGrid.getPosition().x+378&& m.getPosition().y>oppGrid.getPosition().y && m.getPosition().y<oppGrid.getPosition().y+374)
+                    {
+                        this->play.attack((m.getPosition().y-374)/10,(m.getPosition().x-378)/10);
+                        
+                        if(this->play.missed())
+                            playerT=false;
+                    }
+                }
+                
+                if(!playerT)
+                {
+                    if(S->difficulty=='H')
+                        comp.CattackH();
+                    
+                    else if(S->difficulty=='M')
+                        comp.CattackM();
+                    
+                    else comp.CattackL();
+                    
+                    if(this->comp.missed())
+                        playerT=true;
+                }
+                
                 break;
                 
                 // case ....

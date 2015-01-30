@@ -11,6 +11,9 @@
 
 #include "Settings.h"
 #include <SFML/Graphics.hpp>
+#include "Board.h"
+#include "Computer.h"
+#include "Player.h"
 
 using namespace sf;
 
@@ -19,7 +22,7 @@ class GameW
 public:
     GameW(RenderWindow *, Settings *);
     ~GameW();
-    
+
     void initialize();
     void gameloop();
     bool handleEvents();
@@ -28,13 +31,20 @@ public:
     
 private:
     
+    // Game objects
+    Board playerB, computerB;
+    Computer comp;
+    Player play;
+    bool playerT;
+    
+    // SFML objects
     Settings * S;
     RenderWindow * name;
     
     Font pageFont;
     Text title;
     Text backText;
-    vector <Text> rules;
+    vector <Text> options;
     string textSource;
     
     Texture backTexture;
@@ -43,6 +53,12 @@ private:
     Sprite cursor;
     Texture cursorTexture;
     int cursorXpos, cursorYpos;
+    
+    Sprite playerGrid;
+    Sprite oppGrid;
+    Texture gridTexture;
+    
+    Mouse m;
     
     // member for every drawable object
 };

@@ -32,6 +32,28 @@ Ship ::Ship()
     }
 }
 
+Ship :: Ship (Ship& rhs)
+{
+    this->size=rhs.size;
+    this->sunk=rhs.sunk;
+    this->top=rhs.top;
+    this->numberHits=rhs.numberHits;
+    this->horizontal=rhs.horizontal;
+    this->bottom=rhs.bottom;
+}
+
+bool Ship::  operator = (Ship & rhs)
+{
+    this->size=rhs.size;
+    this->sunk=rhs.sunk;
+    this->top=rhs.top;
+    this->numberHits=rhs.numberHits;
+    this->horizontal=rhs.horizontal;
+    this->bottom=rhs.bottom;
+    
+    return true;
+}
+
 Ship ::Ship(int size)
 {
     this->size = size;

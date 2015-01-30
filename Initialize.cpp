@@ -15,9 +15,21 @@ Initialize :: Initialize (RenderWindow * w, Settings * S)
     gameloop();
 }
 
+Initialize :: ~Initialize ()
+{
+}
+
 void Initialize :: initialize()
 {
     // read settings for file / music/ theme/ difficulty
+    backTexture.loadFromFile("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background2.png");
+    backImage.setTexture(backTexture);
+    
+    gridTexture.loadFromFile("/Users/Ingy/Downloads/board.png");
+    
+    playerGrid.setTexture(gridTexture);
+    playerGrid.setPosition(120,60);
+    playerGrid.setScale(1.5, 1.5);
 }
 
 void Initialize :: gameloop()
@@ -28,14 +40,20 @@ void Initialize :: gameloop()
     {
         flag=handleEvents();
         update();
-        //renderScreen();
+        renderScreen();
     }
 }
 
-//void Initialize:: renderScreen()
-//{
-//    
-//}
+void Initialize:: renderScreen()
+{
+    name->clear();
+    
+    name->draw(backImage);
+    
+    name->draw(playerGrid);
+    
+    name->display();
+}
 
 bool Initialize :: handleEvents()
 {

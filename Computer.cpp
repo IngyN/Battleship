@@ -14,21 +14,31 @@ Computer::Computer(Settings * s, Board * player, Board * comp)
     enemyB=comp;
     playerB=player;
     hunt = false;
+    previous=false;
     
     if(s->difficulty=='H')
     {
         this->initializeH();
+        
     }
-    else
-    {
-        comp->initializeR();
-    }
+
+    comp->initializeR();
     
     enemy.setAvatarRE();
     // get a random avatar and put it to enemy
     
+}
+
+Computer::~Computer()
+{
+    
+}
+
+// initializing for lower levels is random
+void Computer::initializeH()
+{
     // checkerboard pattern
-    for(int i=0; i<10; i++)
+        for(int i=0; i<10; i++)
         for(int j=0; j<10; j++)
             mode[(i+j)%2].push_back(make_pair(i,j));
     
@@ -43,17 +53,6 @@ Computer::Computer(Settings * s, Board * player, Board * comp)
     
     count =-1;
     one=rand()%2;
-    
-}
-
-Computer::~Computer()
-{
-    
-}
-
-// initializing for lower levels is random
-void Computer::initializeH()
-{
     
 } // initializing for level hard
 
@@ -81,6 +80,7 @@ void Computer:: CattackH()
                     playerB->attack(mode [0][count].first, mode[0][count].second); //attack the cell
                     
                     cell = playerB->getCell(mode [0][count].first, mode[0][count].second); // get the updated cell
+                    previous=cell->isMiss();
                 }
                 else
                 {
@@ -103,6 +103,8 @@ void Computer:: CattackH()
                     playerB->attack(mode [1][count].first, mode[1][count].second); //attack the cell
                     
                     cell = playerB->getCell(mode [1][count].first, mode[1][count].second); // get the updated cell
+                    
+                    previous=cell->isMiss();
                 }
                 else
                 {
@@ -162,7 +164,9 @@ void Computer:: CattackH()
                 // get updated Cell
                 Cell  * cell=playerB->getCell((*h)[cellIndex]->getPosition().second,(*h)[cellIndex]->getPosition().first);
                 
-                /*h->pop_back();*/ // delete the Cell that has been hit
+                previous=cell->isMiss();
+                
+                // delete the Cell that has been hit
                 h->erase(h->begin() + cellIndex);
                 
                 if(!cell->shipSunk()) // if the ship searched for is not sunk -> HUNT
@@ -194,7 +198,9 @@ void Computer:: CattackH()
                 // get updated Cell
                 Cell  * cell=playerB->getCell((*v)[cellIndex]->getPosition().second,(*v)[cellIndex]->getPosition().first);
                 
-                /*h->pop_back();*/ // delete the Cell that has been hit
+                previous=cell->isMiss();
+                
+                // delete the Cell that has been hit
                 v->erase(v->begin() + cellIndex);
                 
                 if(!cell->shipSunk()) // if the ship searched for is not sunk -> HUNT
@@ -243,10 +249,10 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
             playerB->attack(r, c); //attack the cell
             cell = playerB->getCell(r, c); // get the updated cell
             
+            previous=cell->isMiss();
+            
             if(!cell->isMiss())
             {
-                
-                
                 if(!cell->shipSunk()) // if the ship hunted is sunk reinitialize the h optioins array and v options array
                 {
                     hunt =true;
@@ -293,7 +299,9 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
                 // get updated Cell
                 Cell  * cell=playerB->getCell((*h)[cellIndex]->getPosition().second,(*h)[cellIndex]->getPosition().first);
                 
-                /*h->pop_back();*/ // delete the Cell that has been hit
+                previous=cell->isMiss();
+                
+                // delete the Cell that has been hit
                 h->erase(h->begin() + cellIndex);
                 
                 if(!cell->shipSunk()) // if the ship searched for is not sunk -> HUNT
@@ -325,7 +333,9 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
                 // get updated Cell
                 Cell  * cell=playerB->getCell((*v)[cellIndex]->getPosition().second,(*v)[cellIndex]->getPosition().first);
                 
-                /*h->pop_back();*/ // delete the Cell that has been hit
+                previous=cell->isMiss();
+                
+                // delete the Cell that has been hit
                 v->erase(v->begin() + cellIndex);
                 
                 if(!cell->shipSunk()) // if the ship searched for is not sunk -> HUNT
@@ -366,6 +376,7 @@ void Computer::CattackL()
         }while (playerB->isHit(r,c)); // If this cell was not it before
         
         playerB->attack(r, c); //attack the cell
+        previous= playerB->getCell(r,c)->isMiss(); // update previous
     }
 }
 
@@ -373,5 +384,11 @@ void Computer::CattackL()
 bool Computer::won()
 {
     return(this->playerB->isFinished());
+}
+
+// to check if he missed last one
+bool Computer::missed()
+{
+    return(previous);
 }
 

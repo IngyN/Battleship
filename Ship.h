@@ -18,6 +18,7 @@ class Ship
 public:
     Ship();
     Ship(int size);
+    Ship(Ship & rhs);
     ~Ship();
     
     bool shipSunk();
@@ -34,6 +35,7 @@ public:
     
     // booleans
     bool isH(); //is horizontal
+    bool operator = (Ship &);
 private:
     
     bool sunk;

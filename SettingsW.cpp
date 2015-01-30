@@ -55,29 +55,18 @@ void SettingsW :: initialize()
     fontOptions.erase(fontOptions.begin(), fontOptions.end());
     difficultyOptions.erase(difficultyOptions.begin(),difficultyOptions.end());
     
-//<<<<<<< HEAD
     string bckgrnd = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
     
         string cursorImage = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
     if(set->language=="French")
         cursorImage = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor3.png";
-//    string bckgrnd = "/Users/Alia/Documents/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
-//    string cursorImage1 = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor1.png";
-//    string cursorImage2 = "/Users/Alia/Documents/battleeee/battleeee/data/Images/Cursors/cursor2.png";
 
-    
     bckgrndImageTexture.loadFromFile(bckgrnd);
     bckgrndImageTexture.setSmooth(true);
     bckgrndImage.setTexture(bckgrndImageTexture);
     
 
     pageFont = set->overallFont;
-    
-//    cursorTextureSec.loadFromFile(cursorImage2);
-//    cursorTextureSec.setSmooth(true);
-//    cursorSec.setTexture(cursorTextureSec);
-//    cursorSec.setPosition(490, 360);
-//    cursorSec.setScale(0.42, 0.38);
     
     cursorTexture=this->set->cursorTexture;
     cursorTexture.setSmooth(true);

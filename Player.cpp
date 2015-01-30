@@ -13,7 +13,7 @@ Player :: Player(Settings s, Board * plB, Board * opB)
 {
     opponentB = opB;
     ownB = plB;
-    
+    ownB->initializeR();
 }
 
 Player :: ~Player()
@@ -27,6 +27,7 @@ void Player :: attack(int r, int c)
     if (!opponentB->isHit(r,c))
     {
         opponentB->attack(r,c);
+        previous=opponentB->getCell(r, c)->isMiss();
     }
 }
     
@@ -36,3 +37,7 @@ bool Player::won()
 }
     
     
+bool Player::missed()
+{
+    return previous;
+}

@@ -27,6 +27,7 @@ public:
     
     bool isFinished(); // checks if all the ships are hit.
     bool isHit (int row, int col); // checks if a cell has been hit knowing the x(col) and y(row) position
+    bool hasShip (int row, int col); // returns true if this cell contains a ship;
     
     void attack ( int row, int col); // attacks a cell with the row and column.
     void attack ( Cell *); // attacks a cell

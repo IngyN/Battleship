@@ -32,7 +32,7 @@ Board::~Board() // Destructor
 bool Board :: placeShip(int row, int col, int num)
 {
     Ship * p;
-    *p= SH[num];
+    p= & SH[num];
     
     bool valid = true;
     
@@ -149,10 +149,17 @@ bool Board :: isFinished() // checks if all the ships are hit.
     }
     return f;
 }
+
 bool Board ::isHit (int row, int col) // checks if a cell has been hit knowing the x(col) and y(row)position
 {
     return B[row][col].isHit();
 }
+
+bool Board ::hasShip (int row, int col) // checks if a cell has been hit knowing the x(col) and y(row)position
+{
+    return B[row][col].hasShip();
+}
+
 void Board :: attack (int row, int col) // attacks a cell with the row and column.
 {
     B[row][col].hitCell();
@@ -167,7 +174,7 @@ void Board:: attack (Cell * p)
 Cell* Board:: getCell (int r, int c)
 {
     Cell * y=new Cell;
-    *y=B[r][c];
+    y=&B[r][c];
     return y;
     
 }// retrieve a cell by its row and column
@@ -183,27 +190,27 @@ Ship* Board:: getShip (int r, int c)
 Cell* Board::upCell(Cell * p)
 {
     Cell * n = p;
-    * n = B[p->getPosition().second-1][p->getPosition().first];
+    n = &B[p->getPosition().second-1][p->getPosition().first];
     return n;
 }
 
 Cell* Board::downCell(Cell * p)
 {
     Cell * n = p;
-    * n = B[p->getPosition().second +1][p->getPosition().first];
+    n = &B[p->getPosition().second +1][p->getPosition().first];
     return n;
 }
 
 Cell* Board::rightCell(Cell * p)
 {
     Cell * n = p;
-    * n = B[p->getPosition().second][p->getPosition().first+1];
+    n = & B[p->getPosition().second][p->getPosition().first+1];
     return n;
 }
 
 Cell* Board::leftCell(Cell * p)
 {
     Cell * n = p;
-    * n = B[p->getPosition().second][p->getPosition().first-1];
+    n = & B[p->getPosition().second][p->getPosition().first-1];
     return n;
 }

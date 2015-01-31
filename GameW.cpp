@@ -138,9 +138,10 @@ bool GameW :: handleEvents()
             case Event::MouseButtonPressed:
                 if(Mouse::isButtonPressed(Mouse::Left)&&playerT)
                 {
-                    if (m.getPosition().x>oppGrid.getPosition().x && m.getPosition().x<oppGrid.getPosition().x+378&& m.getPosition().y>oppGrid.getPosition().y && m.getPosition().y<oppGrid.getPosition().y+374)
+                    if (m.getPosition().x>oppGrid.getPosition().x && m.getPosition().x<oppGrid.getPosition().x+378 && m.getPosition().y>oppGrid.getPosition().y && m.getPosition().y<oppGrid.getPosition().y+374)
                     {
-                        this->play.attack((m.getPosition().y-374)/10,(m.getPosition().x-378)/10);
+                        
+                        this->play.attack((m.getPosition().y-60)%39,(m.getPosition().x-470)%39);
                         
                         if(this->play.missed())
                             playerT=false;

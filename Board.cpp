@@ -153,7 +153,7 @@ bool Board ::isHit (int row, int col) // checks if a cell has been hit knowing t
 {
     return B[row][col].isHit();
 }
-void Board :: attack ( int row, int col) // attacks a cell with the row and column.
+void Board :: attack (int row, int col) // attacks a cell with the row and column.
 {
     B[row][col].hitCell();
 }

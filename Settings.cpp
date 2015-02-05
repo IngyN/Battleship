@@ -7,18 +7,19 @@
 //
 
 #include "Settings.h"
+#include "ResourcePath.hpp"
 
 Settings::Settings ()
 {
     language="English";
-    fontPathE = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font1.ttf";
+    fontPathE = resourcePath() + "font1.ttf"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font1.ttf";
     overallFont.loadFromFile(fontPathE);
     
     //string fontPathA = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font1.ttf";
-    fontPathF = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/French/font4.ttf";
+    fontPathF = resourcePath() + "font4.ttf"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/French/font4.ttf";
     
-    cursorPathE="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
-    cursorPathF="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor3.png";
+    cursorPathE= resourcePath() + "cursor1.png"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
+    cursorPathF= resourcePath() + "cursor3.png"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor3.png";
     //cursorPathA="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor3.png";
     
     cursorTexture.loadFromFile(cursorPathE);

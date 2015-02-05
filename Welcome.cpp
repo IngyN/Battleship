@@ -11,6 +11,7 @@
 #include "SettingsW.h"
 #include "Initialize.h"
 #include <fstream>
+#include "ResourcePath.hpp"
 
 // Check last USER for avatar!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -28,18 +29,20 @@ Welcome::~Welcome ()
 
 void Welcome::initialize()
 {
-    string bckg = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
-    string character ="/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Enchantress.png";
-    string curs = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
+    string bckg = resourcePath() + "background3.png"; //"/data/Images/BackgroundImages/background3.png"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
+    string character =  resourcePath() + "Enchantress.png"; //"/data/Images/Avatars/Enemy/Enchantress.png"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Enchantress.png";
+    string curs = resourcePath() + "cursor1.png"; //"/data/Images/Cursors/cursor1.png"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
     
-    string sourceE="/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Welcome/WelcomeE.txt";
-    string sourceF="/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Welcome/WelcomeF.txt";
+    string sourceE= resourcePath() + "WelcomeE.txt"; //data/Text/Welcome/WelcomeE.txt"; // "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Welcome/WelcomeE.txt";
+    string sourceF= resourcePath() + "WelcomeF.txt"; //"/data/Text/Welcome/WelcomeF.txt";// "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Welcome/WelcomeF.txt";
     
     // Pictures
     
-    bgImageTexture.loadFromFile(bckg,IntRect(0, 0, 1600, 2560));
+    
+    bgImageTexture.loadFromFile(bckg );//, IntRect(0, 0, window->getSize().x /*1600*/, window->getSize().y /*2560*/));
     bgImageTexture.setSmooth(true);
     bgImage.setTexture(bgImageTexture);
+    bgImage.setScale(window->getSize().x / double(bgImageTexture.getSize().x) , window->getSize().y / double(bgImageTexture.getSize().y));
     
     characterImageTexture.loadFromFile(character);
     characterImage.setTexture(characterImageTexture);
@@ -112,7 +115,7 @@ void Welcome::initialize()
     welcomeText.setFont(mainFont);
     welcomeText.setCharacterSize(60);
     welcomeText.setColor(Color(10,15,80));
-    welcomeText.setPosition((window->getSize().x)/2-135,230) ;
+    welcomeText.setPosition((window->getSize().x-welcomeText.getLocalBounds().width)/2 , 230) ;
     
     signedIn.setFont(mainFont);
     signedIn.setCharacterSize(25);
@@ -123,7 +126,7 @@ void Welcome::initialize()
     {
         menuItems[i].setColor(Color(10,15,80));
         menuItems[i].setCharacterSize(40);
-        menuItems[i].setPosition(530, 350 + 60 * i);
+        menuItems[i].setPosition( (window->getSize().x - menuItems[i].getLocalBounds().width )/2 /*530*/, 350 + 60 * i);
     }
    
     if(this->set->language=="French")

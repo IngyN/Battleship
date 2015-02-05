@@ -7,6 +7,7 @@
 //
 
 #include "Initialize.h"
+#include "ResourcePath.hpp"
 
 Initialize :: Initialize (RenderWindow * w, Settings * S)
 {
@@ -22,10 +23,10 @@ Initialize :: ~Initialize ()
 void Initialize :: initialize()
 {
     // read settings for file / music/ theme/ difficulty
-    backTexture.loadFromFile("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background2.png");
+    backTexture.loadFromFile(resourcePath() + "/background2.png"); //("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background2.png");
     backImage.setTexture(backTexture);
     
-    gridTexture.loadFromFile("/Users/Ingy/Downloads/board.png");
+    gridTexture.loadFromFile(resourcePath() + "/board.png"); //("/Users/Ingy/Downloads/board.png");
     
     playerGrid.setTexture(gridTexture);
     playerGrid.setPosition(120,60);

@@ -180,7 +180,7 @@ bool Welcome::handleEvents()
                 }
                 if (event.key.code == Keyboard::Return && cursor.getPosition().y == 360+(menuItems.size()-4)*60 )
                 {
-                    Initialize(this->window, set);
+                    //Initialize(this->window, set);
                 }
 
                 // c = (c + 1) % n;

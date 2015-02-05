@@ -37,6 +37,8 @@ void GameW :: initialize()
     playerGrid.setTexture(gridTexture);
     playerGrid.setPosition(60,60);
     oppGrid.setPosition(470, 60);
+    playerGrid.setScale(0.378,0.378);
+    oppGrid.setScale(0.378, 0.378);
     
     shipTexture.loadFromFile("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/sprites/Ships/ship1.png");
     shipHitTexture.loadFromFile("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/sprites/Ships/ship2.png");
@@ -49,7 +51,8 @@ void GameW :: initialize()
         for (int j=0; j<10;j++)
             if (computerB.hasShip(i, j))
             {
-                shipSprite[count].setPosition(470+38*i, 60+38*j);
+//                if (count<10)
+                    shipSprite[count].setPosition(470+38*i, 60+38*j);
                 count++;
             }
     
@@ -157,11 +160,12 @@ bool GameW :: handleEvents()
             case Event::MouseButtonPressed:
                 if(Mouse::isButtonPressed(Mouse::Left)&&playerT)
                 {
-                    if (m.getPosition().x>oppGrid.getPosition().x && m.getPosition().x<oppGrid.getPosition().x+378 && m.getPosition().y>oppGrid.getPosition().y && m.getPosition().y<oppGrid.getPosition().y+374)
+                    if (m.getPosition(*name).x>oppGrid.getPosition().x && m.getPosition(*name).x<oppGrid.getPosition().x+378 && m.getPosition(*name).y>oppGrid.getPosition().y && m.getPosition(*name).y<oppGrid.getPosition().y+374)
                     {
-                        
-                        this->play.attack((m.getPosition().y-60)%38,(m.getPosition().x-470)%38);
-                        
+                        cout << m.getPosition(*name).y << "," << m.getPosition(*name).x << endl;
+                        cout <<"trial: "<<(m.getPosition(*name).y-60)/38<< ", "<<(m.getPosition(*name).x-470)/38<<endl;
+                        this->play.attack((m.getPosition(*name).y-60)/38,(m.getPosition(*name).x-470)/38);
+        
                         if(this->play.missed())
                             playerT=false;
                     }
@@ -196,10 +200,12 @@ void GameW :: update()
     // animations not linked to the user
     int count =0;
     for (int i=0; i<10; i++)
-        for (int j=0; j<10;j++)
+        for (int j=0; j<10;j++){
+            
             if (computerB.hasShip(i, j)&& computerB.isHit(i, j))
             {
                 shipSprite[count].setTexture(shipHitTexture);
                 count++;
             }
+        }
 }

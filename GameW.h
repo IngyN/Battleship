@@ -58,11 +58,6 @@ private:
     Sprite oppGrid;
     Texture gridTexture;
     
-    // Ships by cell
-    Sprite shipSprite[20];
-    Texture shipTexture;
-    Texture shipHitTexture;
-    
     Mouse m;
     
     // member for every drawable object

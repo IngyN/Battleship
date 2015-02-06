@@ -29,17 +29,14 @@ Welcome::~Welcome ()
 
 void Welcome::initialize()
 {
-    string bckg = resourcePath() + "background3.png"; //"/data/Images/BackgroundImages/background3.png"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
-    string character =  resourcePath() + "Enchantress.png"; //"/data/Images/Avatars/Enemy/Enchantress.png"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/Enemy/Enchantress.png";
-    string curs = resourcePath() + "cursor1.png"; //"/data/Images/Cursors/cursor1.png"; //"/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
-    
-    string sourceE= resourcePath() + "WelcomeE.txt"; //data/Text/Welcome/WelcomeE.txt"; // "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Welcome/WelcomeE.txt";
-    string sourceF= resourcePath() + "WelcomeF.txt"; //"/data/Text/Welcome/WelcomeF.txt";// "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Welcome/WelcomeF.txt";
+    string bckg = resourcePath() + "background3.png";
+    string character =  resourcePath() + "EnchantressA.png";
+    string curs = resourcePath() + "cursor1.png";
+    string sourceE= resourcePath() + "WelcomeE.txt";
+    string sourceF= resourcePath() + "WelcomeF.txt";
     
     // Pictures
-    
-    
-    bgImageTexture.loadFromFile(bckg );//, IntRect(0, 0, window->getSize().x /*1600*/, window->getSize().y /*2560*/));
+    bgImageTexture.loadFromFile(bckg);//, IntRect(0, 0, window->getSize().x /*1600*/, window->getSize().y /*2560*/));
     bgImageTexture.setSmooth(true);
     bgImage.setTexture(bgImageTexture);
     bgImage.setScale(window->getSize().x / double(bgImageTexture.getSize().x) , window->getSize().y / double(bgImageTexture.getSize().y));

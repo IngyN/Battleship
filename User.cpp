@@ -8,13 +8,15 @@
 
 #include "User.h"
 #include <iostream>
+#include "ResourcePath.hpp"
 
 using namespace std;
-const string enemies = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/avatarE.png";
-const string players = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Avatars/avatarP.png";
 
 User::User()
 {
+    string enemies = resourcePath()+ "avatarE.png";
+    string players = resourcePath()+ "avatarP.png";
+    
         if (!enemyAvatars.loadFromFile(enemies.c_str()))
         {
         cout << "Unable to load file for enemy"<< endl;

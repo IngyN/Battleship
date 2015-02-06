@@ -12,6 +12,7 @@
 #include <utility>
 #include <SFML/Graphics.hpp>
 using namespace std;
+using namespace sf;
 
 class Ship
 {
@@ -45,6 +46,7 @@ private:
     // top.first = rowTop (y coordinate)
     // top.second = colTop (x coordinate)
     pair <int,int> top, bottom;
+    
     
 };
 

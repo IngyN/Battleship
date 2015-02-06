@@ -8,8 +8,9 @@
 
 #include "GameW.h"
 #include <fstream>
+#include "ResourcePath.hpp"
 
-GameW :: GameW (RenderWindow * w, Settings * S) :comp(S, &playerB, &computerB), play(*S, &playerB, &computerB)
+GameW :: GameW (RenderWindow * w, Settings * S) : computerB(true), playerB(false), comp(S, &playerB, &computerB), play(*S, &playerB, &computerB)
 {
     name= w;
     this->S=S;
@@ -28,10 +29,10 @@ GameW :: ~ GameW()
 void GameW :: initialize()
 {
     // read settings from file / music/ theme/ difficulty
-    backTexture.loadFromFile("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background2.png");
+    backTexture.loadFromFile(resourcePath()+"background2.png");
     backImage.setTexture(backTexture);
     
-    gridTexture.loadFromFile("/Users/Ingy/Downloads/board.png");
+    gridTexture.loadFromFile(resourcePath()+"board.png");
     
     oppGrid.setTexture(gridTexture);
     playerGrid.setTexture(gridTexture);
@@ -40,26 +41,9 @@ void GameW :: initialize()
     playerGrid.setScale(0.378,0.378);
     oppGrid.setScale(0.378, 0.378);
     
-    shipTexture.loadFromFile("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/sprites/Ships/ship1.png");
-    shipHitTexture.loadFromFile("/Users/Ingy/Desktop/battleeee/battleeee/data/Images/sprites/Ships/ship2.png");
-    
-    for(int i=0; i<20; i++)
-        shipSprite[i].setTexture(shipTexture);
-    
-    int count =0;
-    for (int i=0; i<10; i++)
-        for (int j=0; j<10;j++)
-            if (computerB.hasShip(i, j))
-            {
-//                if (count<10)
-                    shipSprite[count].setPosition(470+38*i, 60+38*j);
-                count++;
-            }
-    
-    
     options.erase(options.begin(), options.end());
     ifstream in;
-    in.open("/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesE.txt");
+    in.open(resourcePath()+"RulesE.txt");
     
     pageFont=S->overallFont;
     //pageFont.loadFromFile(Tfont);
@@ -116,22 +100,10 @@ void GameW:: renderScreen()
     name->draw(backImage);
     name->draw(oppGrid);
     name->draw(playerGrid);
-    //    //Text
-    //    name->draw(title);
-    //    name->draw(backText);
-    //
-    //    for(int i=0; i<rules.size();i++)
-    //    {
-    //        name->draw(rules[i]);
-    //    }
-    //
-    //    //cursor
-    //    name->draw(cursor);
-    // Displaying ships
     
-    for(int i=0; i<20; i++)
-        name->draw(shipSprite[i]);
-        
+    this->computerB.drawB(name);
+    this->playerB.drawB(name);
+    
     this->name->display();
 }
 
@@ -162,8 +134,8 @@ bool GameW :: handleEvents()
                 {
                     if (m.getPosition(*name).x>oppGrid.getPosition().x && m.getPosition(*name).x<oppGrid.getPosition().x+378 && m.getPosition(*name).y>oppGrid.getPosition().y && m.getPosition(*name).y<oppGrid.getPosition().y+374)
                     {
-                        cout << m.getPosition(*name).y << "," << m.getPosition(*name).x << endl;
                         cout <<"trial: "<<(m.getPosition(*name).y-60)/38<< ", "<<(m.getPosition(*name).x-470)/38<<endl;
+                        
                         this->play.attack((m.getPosition(*name).y-60)/38,(m.getPosition(*name).x-470)/38);
         
                         if(this->play.missed())
@@ -198,14 +170,5 @@ bool GameW :: handleEvents()
 void GameW :: update()
 {
     // animations not linked to the user
-    int count =0;
-    for (int i=0; i<10; i++)
-        for (int j=0; j<10;j++){
-            
-            if (computerB.hasShip(i, j)&& computerB.isHit(i, j))
-            {
-                shipSprite[count].setTexture(shipHitTexture);
-                count++;
-            }
-        }
+
 }

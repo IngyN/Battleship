@@ -19,12 +19,14 @@ Computer::Computer(Settings * s, Board * player, Board * comp)
     if(s->difficulty=='H')
     {
         this->initializeH();
-        
     }
 
     comp->initializeR();
     
     enemy.setAvatarRE();
+    
+    v = new vector<Cell*>;
+    h = new vector<Cell*>;
     // get a random avatar and put it to enemy
     
 }
@@ -120,8 +122,9 @@ void Computer:: CattackH()
                 if(!cell->shipSunk()) // if the ship hunted is sunk reinitialize the h options array and v options array
                 {
                     hunt =true;
-                    h->clear();
-                    v->clear();
+                    
+                    h->resize(0);
+                    v->resize(0);
                     
                     // Updating h and v with the possible options for attack
                     if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
@@ -173,7 +176,8 @@ void Computer:: CattackH()
                 {
                     if(!cell->isMiss()) // if the last attack is a miss we dont change anything
                     {
-                        v->clear();
+                        v->resize(0);
+                
                         // add the rightCell and leftCell if they are options
                         if(playerB->rightCell(cell) != NULL && !playerB->rightCell(cell)->isHit())
                             h->push_back(playerB->rightCell(cell));
@@ -207,7 +211,8 @@ void Computer:: CattackH()
                 {
                     if(!cell->isMiss()) // if the last attack is a miss we dont change anything
                     {
-                        h->clear();
+                        h->resize(0);
+                        
                         // add the upCell and downCell if they are options
                         if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
                             v->push_back(playerB->downCell(cell));
@@ -256,8 +261,10 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
                 if(!cell->shipSunk()) // if the ship hunted is sunk reinitialize the h optioins array and v options array
                 {
                     hunt =true;
-                    h->clear();
-                    v->clear();
+                    
+                    h->resize(0);
+                    v->resize(0);
+
                     // Updating h and v with the possible options for attack
                     if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
                         v->push_back(playerB->downCell(cell));
@@ -308,7 +315,7 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
                 {
                     if(!cell->isMiss()) // if the last attack is a miss we dont change anything
                     {
-                        v->clear();
+                        v->resize(0);
                         // add the rightCell and leftCell if they are options
                         if(playerB->rightCell(cell) != NULL && !playerB->rightCell(cell)->isHit())
                             h->push_back(playerB->rightCell(cell));
@@ -342,7 +349,7 @@ void Computer:: CattackM() // random if a ship has been sunk, Hunt mode if a hit
                 {
                     if(!cell->isMiss()) // if the last attack is a miss we dont change anything
                     {
-                        h->clear();
+                        h->resize(0);
                         // add the upCell and downCell if they are options
                         if(playerB->downCell(cell) != NULL && !playerB->downCell(cell)->isHit())
                             v->push_back(playerB->downCell(cell));

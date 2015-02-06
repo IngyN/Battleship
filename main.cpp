@@ -11,7 +11,7 @@ int main()
 {
     srand(unsigned(time(NULL)));
     // Create the main window
-    RenderWindow window(sf::VideoMode::getDesktopMode(), "Welcome", Style::Fullscreen);
+    RenderWindow window(sf::VideoMode::getDesktopMode(), "Welcome"/*, Style::Fullscreen*/);
     
     RenderWindow * w;
     w=&window;
@@ -35,9 +35,9 @@ int main()
     Settings * S= new Settings;
     S->language="English";
     
- //   Welcome myWindow(w,S);
+   //Welcome myWindow(w,S);
     
-    GameW myGame(w,S);
+   GameW myGame(w,S);
 
     system("pause");
     return 0;

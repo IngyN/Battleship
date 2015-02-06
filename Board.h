@@ -19,6 +19,7 @@ class Board
 public:
     
     Board(); // Constructor
+    Board(bool comp); // Other constructor
     ~Board(); // Destructor
     
     void initializeR(); // initializes the board with ships randomly placed
@@ -39,6 +40,9 @@ public:
     Cell* downCell(Cell *);
     Cell* rightCell(Cell *);
     Cell* leftCell(Cell *);
+    
+    // draw
+    void drawB (RenderWindow *);
 private:
     Cell B[10][10];  // 2D array
     Ship SH[10]; // ships belonging to the board

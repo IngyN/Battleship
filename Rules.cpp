@@ -9,12 +9,7 @@
 #include "Rules.h"
 #include <fstream>
 #include <iostream>
-
-const string BACKGROUND = "backgroundRules.png";
-const string RULES_E = "RulesE.txt";
-const string RULES_F = "RulesF.txt";
-const string RULES_A = "RulesA.txt";
-const string RULES_M = "RulesMusic.ogg";
+#include "ResourcePath.hpp"
 
 Rules :: Rules (RenderWindow * w, Settings * S)
 {
@@ -32,15 +27,13 @@ void Rules :: initialize()
 {
     // read settings from file / music/ theme/ difficulty
     
-    const string BACKGROUND = "backgroundRules.png";
-    const string RULES_E = "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesE.txt";
-    const string RULES_F = "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/Rules/RulesF.txt";
-    const string RULES_A = "RulesA.txt";
-    const string RULES_M = "RulesMusic.ogg";
+
+    const string RULES_E = resourcePath()+"RulesE.txt";
+    const string RULES_F = resourcePath()+"RulesF.txt";
+    const string RULES_A = resourcePath()+ "RulesA.txt";
     
-    string Tfont = "/Users/Ingy/Desktop/battleeee/battleeee/data/Fonts/English/font2.ttf";
-    string back = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background7.png";
-    string curs = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor2.png";
+    string back = resourcePath()+"background7.png";
+    string curs = resourcePath()+"cursor2.png";
     
     backTexture.loadFromFile(back);
     backImage.setTexture(backTexture);
@@ -49,7 +42,6 @@ void Rules :: initialize()
     ifstream in;
     
     pageFont=S->overallFont;
-    //pageFont.loadFromFile(Tfont);
     
     if (S->language== "English")
     {

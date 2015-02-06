@@ -30,6 +30,7 @@ Ship ::Ship()
         bottom.first=top.first+size-1;
         bottom.second=top.second;
     }
+    
 }
 
 Ship :: Ship (Ship& rhs)

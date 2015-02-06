@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iostream>
 #include <ios>
+#include "ResourcePath.hpp"
 
 using namespace std;
 using namespace sf;
@@ -43,11 +44,11 @@ void SettingsW :: initialize()
     string pageTextSource;
     
     if (set->language == "English")
-        pageTextSource = "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/SettingsW/SettingsWE.txt";
+        pageTextSource = resourcePath()+"SettingsWE.txt";
     else if (set->language == "French")
-        pageTextSource = "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/SettingsW/SettingsWF.txt";
+        pageTextSource = resourcePath()+"SettingsWF.txt";
     else if (set->language == "Arabic")
-        pageTextSource = "/Users/Ingy/Desktop/battleeee/battleeee/data/Text/SettingsW/SettingsWA.txt";
+        pageTextSource = resourcePath()+"SettingsWA.txt";
     
     languageOptions.erase(languageOptions.begin(),languageOptions.end());
     volumeOptions.erase(volumeOptions.begin(), volumeOptions.end());
@@ -55,9 +56,11 @@ void SettingsW :: initialize()
     fontOptions.erase(fontOptions.begin(), fontOptions.end());
     difficultyOptions.erase(difficultyOptions.begin(),difficultyOptions.end());
     
-    string bckgrnd = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/BackgroundImages/background3.png";
+    string bckgrnd = resourcePath()+"background3.png";
     
-        string cursorImage = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor1.png";
+    // Should take from Settings class
+    string cursorImage = resourcePath()+"cursor1.png";
+    
     if(set->language=="French")
         cursorImage = "/Users/Ingy/Desktop/battleeee/battleeee/data/Images/Cursors/cursor3.png";
 

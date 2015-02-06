@@ -23,6 +23,35 @@ Board::Board() // Constructor
     
     for (int i=6; i<10;i++)
         SH[i].setSize(1);// Submarine
+    
+    bool comp=true;
+    
+    for(int i=0; i<10; i++)
+        for(int j=0; j<10; j++)
+            this->B[i][j].setPosition(j, i, comp);
+            
+}
+
+Board::Board(bool comp) // Constructor
+{
+    cout <<"1";
+    SH[0].setSize(4);// Battleship
+    
+    cout <<" 2";
+    SH[1].setSize(3);// Cruiser
+    SH[2].setSize(3);// Cruiser
+    
+    SH[3].setSize(2);// Destroyer
+    SH[4].setSize(2);// Destroyer
+    SH[5].setSize(2);// Destroyer
+    
+    for (int i=6; i<10;i++)
+        SH[i].setSize(1);// Submarine
+    
+    for(int i=0; i<10; i++)
+        for(int j=0; j<10; j++)
+            this->B[i][j].setPosition(j, i, comp);
+    
 }
 
 Board::~Board() // Destructor
@@ -189,28 +218,54 @@ Ship* Board:: getShip (int r, int c)
 
 Cell* Board::upCell(Cell * p)
 {
+    if(p->getPosition().second-1 >= 0){
     Cell * n = p;
     n = &B[p->getPosition().second-1][p->getPosition().first];
     return n;
+    }
+    else
+        return NULL;
 }
 
 Cell* Board::downCell(Cell * p)
 {
+    if(p->getPosition().second +1 < 10)
+    {
     Cell * n = p;
     n = &B[p->getPosition().second +1][p->getPosition().first];
     return n;
+    }
+    else
+        return NULL;
 }
 
 Cell* Board::rightCell(Cell * p)
 {
+    if(p->getPosition().first+1 < 10)
+    {
     Cell * n = p;
     n = & B[p->getPosition().second][p->getPosition().first+1];
     return n;
+    }
+    else
+        return NULL;
 }
 
 Cell* Board::leftCell(Cell * p)
 {
+    if(p->getPosition().first-1 >= 0)
+    {
     Cell * n = p;
     n = & B[p->getPosition().second][p->getPosition().first-1];
     return n;
+    }
+    else
+        return NULL;
+}
+
+void Board:: drawB(RenderWindow * n)
+{
+    for (int i=0; i<10; i++)
+        for (int j=0; j<10; j++)
+            B[i][j].drawC(n);
 }

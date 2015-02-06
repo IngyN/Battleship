@@ -25,12 +25,13 @@ public:
     bool isMiss(); // Check if a cell that is hit is a miss
     void hitCell(); // attack the ship and update the boolean "hit" update miss as well
     bool hasShip();
-    void setPosition (int x, int y);
+    void setPosition (int x, int y, bool);
     pair <int, int> getPosition ();
     bool shipSunk (); // return true if the ship the cell contains is sunk
     void placeShip(Ship*);
     Ship * getShip();
     void removeShip();
+    void drawC (RenderWindow *);
     
 private:
     bool hit;// set to false in constructor
@@ -38,6 +39,11 @@ private:
     int xpos, ypos;
     Ship * s; // null in constructor
     
+    // SFML SHIT
+    sf::Sprite cellSprite;
+    sf::Texture blank;
+    sf::Texture shipTexture;
+    sf::Texture shipHitTexture;
     
 };
 #endif /* defined(__battleeee__Cell__) */

@@ -10,10 +10,8 @@
 
 Board::Board() // Constructor
 {
-    cout <<"1";
     SH[0].setSize(4);// Battleship
     
-    cout <<" 2";
     SH[1].setSize(3);// Cruiser
     SH[2].setSize(3);// Cruiser
     
@@ -29,15 +27,15 @@ Board::Board() // Constructor
     for(int i=0; i<10; i++)
         for(int j=0; j<10; j++)
             this->B[i][j].setPosition(j, i, comp);
-            
+    
 }
 
 Board::Board(bool comp) // Constructor
 {
-    cout <<"1";
+    
     SH[0].setSize(4);// Battleship
     
-    cout <<" 2";
+    
     SH[1].setSize(3);// Cruiser
     SH[2].setSize(3);// Cruiser
     
@@ -66,26 +64,52 @@ bool Board :: placeShip(int row, int col, int num)
     bool valid = true;
     
     if (p->isH())
-    { for(int i=-1; i<2; i++)
+    {
+        for(int i=-1; i<2; i++)
             for(int j=-1; j<SH[num].getSize()+1; j++)
-                if(B[row+i][col+j].hasShip())
-                    valid=false;
+            {
+                if(row+i >= 0 && row+i < 10 && col+j >= 0 && col+j < 10)
+                {
+                    if(B[row+i][col+j].hasShip())
+                        valid=false;
+                }
+                else
+                {
+                    //valid= false;
+                }
+            }
     }
     else
         for(int i=-1; i<SH[num].getSize()+1; i++)
             for(int j=-1; j<2; j++)
-                if(B[row+i][col+j].hasShip())
-                    valid=false;
+            {
+                if(row+i >= 0 && row+i < 10 && col+j >= 0 && col+j < 10)
+                {
+                    if(B[row+i][col+j].hasShip())
+                        valid=false;
+                }
+                else
+                {
+                    //valid = false;
+                }
+            }
     
     if(valid)
     {
         if(p->isH())
             for (int i=0; i<SH[num].getSize();i++)
+            {
+                p->setPosition(row, col);
                 B[row][col+i].placeShip(p);
+            }
         else
             for (int i=0; i<SH[num].getSize();i++)
+            {
+                p->setPosition(row, col);
                 B[row+i][col].placeShip(p);
+            }
         
+        cout << row << "," << col << endl;
         p->setPosition(row, col);
     }
     
@@ -135,30 +159,25 @@ void Board :: initializeR() // initializes the board with ships randomly placed
             valid =true;
             
             h= rand()%2;
-            r =rand ()%10;
-            c =rand()%10;
+            
+            if (h)
+            {
+                r =rand ()%(10);
+                c =rand()%(10-SH[w].getSize()+1);
+            }
+            else
+            {
+                r =rand ()%(10-SH[w].getSize()+1);
+                c =rand()%(10);
+            }
             
             SH[w].setOrientation(h);
             
-            if(h)
-            {
-                for(int i=-1; i<2; i++)
-                    for(int j=-1; j<SH[w].getSize()+1; j++)
-                        if(B[r+i][c+j].hasShip())
-                            valid=false;
-            }
-            else
-                for(int i=-1; i<SH[w].getSize()+1; i++)
-                    for(int j=-1; j<2; j++)
-                        if(B[r+i][c+j].hasShip())
-                            valid=false;
-        
+            valid=placeShip(r, c, w);
             
         } while (!valid);
         
         SH[w].setPosition(r, c);
-        
-        placeShip(r, c, w);
         
     }
     
@@ -192,17 +211,59 @@ bool Board ::hasShip (int row, int col) // checks if a cell has been hit knowing
 void Board :: attack (int row, int col) // attacks a cell with the row and column.
 {
     B[row][col].hitCell();
+    
+    if(B[row][col].shipSunk())
+    {
+        Ship * ship;
+        ship=B[row][col].getShip();
+        
+        if (ship->isH())
+        {
+            for (int i=-1; i<2; i++)
+                for (int j=-1; j<ship->getSize()+1; j++)
+                    if(!B[row+i][col+j].hasShip())
+                        B[row+i][col+j].hitCell();
+        }
+        else
+        {
+            for (int i=-1; i<ship->getSize()+1; i++)
+                for (int j=-1; j<2; j++)
+                    if(!B[row+i][col+j].hasShip())
+                        B[row+i][col+j].hitCell();
+        }
+    }
 }
 
 void Board:: attack (Cell * p)
 {
     B[p->getPosition().second][p->getPosition().first].hitCell();
     
+    if(B[p->getPosition().second][p->getPosition().first].shipSunk())
+    {
+        Ship * ship;
+        ship=B[p->getPosition().second][p->getPosition().first].getShip();
+        
+        if (ship->isH())
+        {
+            for (int i=-1; i<2; i++)
+                for (int j=-1; j<ship->getSize()+1; j++)
+                    if(!B[p->getPosition().second+i][p->getPosition().first+j].hasShip())
+                        B[p->getPosition().second+i][p->getPosition().first+j].hitCell();
+        }
+        else
+        {
+            for (int i=-1; i<ship->getSize()+1; i++)
+                for (int j=-1; j<2; j++)
+                    if(!B[p->getPosition().second+i][p->getPosition().first+j].hasShip())
+                        B[p->getPosition().second+i][p->getPosition().first+j].hitCell();
+        }
+    }
+    
 }// attacks a cell
 
 Cell* Board:: getCell (int r, int c)
 {
-    Cell * y=new Cell;
+    Cell * y;
     y=&B[r][c];
     return y;
     
@@ -210,7 +271,7 @@ Cell* Board:: getCell (int r, int c)
 
 Ship* Board:: getShip (int r, int c)
 {
-    Ship * y=new Ship;
+    Ship * y;
     y=B[r][c].getShip();
     return y;
     
@@ -219,9 +280,9 @@ Ship* Board:: getShip (int r, int c)
 Cell* Board::upCell(Cell * p)
 {
     if(p->getPosition().second-1 >= 0){
-    Cell * n = p;
-    n = &B[p->getPosition().second-1][p->getPosition().first];
-    return n;
+        Cell * n = p;
+        n = &B[p->getPosition().second-1][p->getPosition().first];
+        return n;
     }
     else
         return NULL;
@@ -231,9 +292,9 @@ Cell* Board::downCell(Cell * p)
 {
     if(p->getPosition().second +1 < 10)
     {
-    Cell * n = p;
-    n = &B[p->getPosition().second +1][p->getPosition().first];
-    return n;
+        Cell * n = p;
+        n = &B[p->getPosition().second +1][p->getPosition().first];
+        return n;
     }
     else
         return NULL;
@@ -243,9 +304,9 @@ Cell* Board::rightCell(Cell * p)
 {
     if(p->getPosition().first+1 < 10)
     {
-    Cell * n = p;
-    n = & B[p->getPosition().second][p->getPosition().first+1];
-    return n;
+        Cell * n = p;
+        n = & B[p->getPosition().second][p->getPosition().first+1];
+        return n;
     }
     else
         return NULL;
@@ -255,9 +316,9 @@ Cell* Board::leftCell(Cell * p)
 {
     if(p->getPosition().first-1 >= 0)
     {
-    Cell * n = p;
-    n = & B[p->getPosition().second][p->getPosition().first-1];
-    return n;
+        Cell * n = p;
+        n = & B[p->getPosition().second][p->getPosition().first-1];
+        return n;
     }
     else
         return NULL;
@@ -268,4 +329,22 @@ void Board:: drawB(RenderWindow * n)
     for (int i=0; i<10; i++)
         for (int j=0; j<10; j++)
             B[i][j].drawC(n);
+}
+
+void Board:: debug()
+{
+    cout <<"--------------------------------------------------"<<endl;
+    
+    for (int i=0; i<10; i++)
+    {
+        for (int j=0; j<10; j++)
+        {
+            if(B[i][j].hasShip())
+                cout << 'X';
+            else cout << '$';
+        }
+        cout <<endl;
+    }
+    
+    cout <<"--------------------------------------------------"<<endl;
 }

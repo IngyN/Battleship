@@ -38,8 +38,8 @@ void GameW :: initialize()
     playerGrid.setTexture(gridTexture);
     playerGrid.setPosition(60,60);
     oppGrid.setPosition(470, 60);
-    playerGrid.setScale(0.378,0.378);
-    oppGrid.setScale(0.378, 0.378);
+    playerGrid.setScale(0.38,0.38);
+    oppGrid.setScale(0.38, 0.38);
     
     options.erase(options.begin(), options.end());
     ifstream in;
@@ -104,6 +104,11 @@ void GameW:: renderScreen()
     this->computerB.drawB(name);
     this->playerB.drawB(name);
     
+//    cout << "PLAYER" <<endl<<endl;
+//    playerB.debug();
+//    cout << "COMPUTER" <<endl<<endl;
+//    computerB.debug();
+    
     this->name->display();
 }
 
@@ -132,7 +137,7 @@ bool GameW :: handleEvents()
             case Event::MouseButtonPressed:
                 if(Mouse::isButtonPressed(Mouse::Left)&&playerT)
                 {
-                    if (m.getPosition(*name).x>oppGrid.getPosition().x && m.getPosition(*name).x<oppGrid.getPosition().x+378 && m.getPosition(*name).y>oppGrid.getPosition().y && m.getPosition(*name).y<oppGrid.getPosition().y+374)
+                    if (m.getPosition(*name).x>oppGrid.getPosition().x && m.getPosition(*name).x<oppGrid.getPosition().x+380 && m.getPosition(*name).y>oppGrid.getPosition().y && m.getPosition(*name).y<oppGrid.getPosition().y+380)
                     {
                         cout <<"trial: "<<(m.getPosition(*name).y-60)/38<< ", "<<(m.getPosition(*name).x-470)/38<<endl;
                         

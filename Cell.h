@@ -19,7 +19,7 @@ class Cell
 {
 public:
     Cell();// Constructor
-    Cell(Cell &); // copy constructor
+//    Cell(Cell &); // copy constructor
     ~Cell();
     bool isHit(); 
     bool isMiss(); // Check if a cell that is hit is a miss
@@ -44,6 +44,7 @@ private:
     sf::Texture blank;
     sf::Texture shipTexture;
     sf::Texture shipHitTexture;
+    sf::Texture cellHitTexture;
     
 };
 #endif /* defined(__battleeee__Cell__) */

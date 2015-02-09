@@ -27,15 +27,11 @@ Cell :: Cell()
     string textureSource1= resourcePath()+ "ship2.png";
     
     this->shipHitTexture.loadFromFile(textureSource1);
-}
-
-Cell:: Cell(Cell & rhs)
-{
-    this->hit= rhs.hit;
-    this->xpos = rhs.xpos;  this->ypos = rhs.xpos;
-    this->miss=rhs.miss; this->s=rhs.s; 
     
-}// copy constructor
+    string textureSource2=resourcePath()+ "cross.png";
+    
+    this-> cellHitTexture.loadFromFile(textureSource2);
+}
 
 Cell :: ~Cell()
 {
@@ -58,10 +54,15 @@ bool Cell :: isMiss() // Check if a cell that is hit is a miss
 void Cell :: hitCell() // attack the ship and update the boolean "hit" update miss as well
 {
     hit = true;
-    cellSprite.setTexture(shipHitTexture);
     
     if(!this->hasShip())
+    {
         miss=true;
+        cellSprite.setTexture(cellHitTexture);
+        cellSprite.setTextureRect(IntRect(0,0,cellHitTexture.getSize().x, cellHitTexture.getSize().y));
+    }
+    
+    else cellSprite.setTexture(shipHitTexture);
 }
 bool Cell :: hasShip()
 {
@@ -86,7 +87,7 @@ bool Cell :: shipSunk () // return true if the ship the cell contains is sunk
     if(s != NULL)
         return(s->shipSunk());
     else{
-        cout << "error s is null!!!" << endl;
+      //  cout << "error s is null!!!" << endl;
         return false;
     }
 }

@@ -20,23 +20,26 @@ Player :: ~Player()
 {
     
 }
-    
-    //the attack function receives the coordinates and gets the cell pointer and attacks it on the opponent board
+
+//the attack function receives the coordinates and gets the cell pointer and attacks it on the opponent board
 void Player :: attack(int r, int c)
 {
-    if (!opponentB->isHit(r,c))
+    if(!opponentB->isFinished())
     {
-        opponentB->attack(r,c);
-        previous=opponentB->getCell(r, c)->isMiss();
+        if (!opponentB->isHit(r,c))
+        {
+            opponentB->attack(r,c);
+            previous=opponentB->getCell(r, c)->isMiss();
+        }
     }
 }
-    
+
 bool Player::won()
 {
     return ownB->isFinished();
 }
-    
-    
+
+
 bool Player::missed()
 {
     return previous;

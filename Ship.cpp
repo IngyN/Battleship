@@ -128,17 +128,6 @@ void Ship :: setPosition(int rowTop,int colTop)
 
 void Ship::setOrientation (bool horiz)
 {
-    if(horiz)
-    {
-        bottom.first=top.first;
-        bottom.second=top.second+size-1;
-    }
-    else
-    {
-        bottom.first=top.first+size-1;
-        bottom.second=top.second;
-    }
-    
     this->horizontal=horiz;
 }
 

@@ -62,7 +62,11 @@ void Cell :: hitCell() // attack the ship and update the boolean "hit" update mi
         cellSprite.setTextureRect(IntRect(0,0,cellHitTexture.getSize().x, cellHitTexture.getSize().y));
     }
     
-    else cellSprite.setTexture(shipHitTexture);
+    else
+    {
+       cellSprite.setTexture(shipHitTexture);
+        s->hitShip();
+    }
 }
 bool Cell :: hasShip()
 {

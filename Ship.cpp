@@ -111,15 +111,11 @@ void Ship :: setPosition(int rowTop,int colTop)
     
     if(horizontal)
     {
-        top.first=0;
-        top.second =0;
         bottom.first=top.first;
         bottom.second=top.second+size-1;
     }
     else
     {
-        top.first=0;
-        top.second =0;
         bottom.first=top.first+size-1;
         bottom.second=top.second;
     }
@@ -148,4 +144,9 @@ pair <pair<int,int>,pair<int,int>> Ship ::getPosition() const
 bool Ship:: isH()
 {
     return horizontal;
+}
+
+void Ship::hitShip()
+{
+    numberHits++;
 }

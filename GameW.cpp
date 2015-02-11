@@ -16,9 +16,10 @@ GameW :: GameW (RenderWindow * w, Settings * S) : computerB(true), playerB(false
     this->S=S;
     
     initialize();
+   
+
     
     gameloop();
-    playerT=true;
     
 }
 
@@ -28,6 +29,8 @@ GameW :: ~ GameW()
 }
 void GameW :: initialize()
 {
+    playerT=true;
+    
     // read settings from file / music/ theme/ difficulty
     backTexture.loadFromFile(resourcePath()+"background2.png");
     backImage.setTexture(backTexture);
@@ -104,10 +107,10 @@ void GameW:: renderScreen()
     this->computerB.drawB(name);
     this->playerB.drawB(name);
     
-//    cout << "PLAYER" <<endl<<endl;
-//    playerB.debug();
-//    cout << "COMPUTER" <<endl<<endl;
-//    computerB.debug();
+    //    cout << "PLAYER" <<endl<<endl;
+    //    playerB.debug();
+    //    cout << "COMPUTER" <<endl<<endl;
+    //    computerB.debug();
     
     this->name->display();
 }
@@ -124,6 +127,29 @@ bool GameW :: handleEvents()
                 name->close();
                 flag=false;
                 break;
+
+            case Event::MouseButtonPressed:
+
+                if(event.mouseButton.button == Mouse::Left && playerT)
+                {
+                    if (m.getPosition(*name).x>oppGrid.getPosition().x && m.getPosition(*name).x<oppGrid.getPosition().x+380 && m.getPosition(*name).y>oppGrid.getPosition().y && m.getPosition(*name).y<oppGrid.getPosition().y+380)
+                    {
+                        int rowNumber = (m.getPosition(*name).y-60)/38;
+                        int colNumber = (m.getPosition(*name).x-470)/38;
+                        if(!computerB.getCell(rowNumber, colNumber)->isHit()){
+                            this->play.attack(rowNumber, colNumber);
+                            
+                            if(this->play.missed())
+                                playerT=false;
+                        }
+                    }
+                }
+                
+
+                
+                break;
+                
+                // case ....
                 
             case Event::KeyPressed:
                 if (event.key.code == Keyboard::Escape)
@@ -134,38 +160,7 @@ bool GameW :: handleEvents()
                 {
                     flag=false;
                 }
-            case Event::MouseButtonPressed:
-                if(Mouse::isButtonPressed(Mouse::Left)&&playerT)
-                {
-                    if (m.getPosition(*name).x>oppGrid.getPosition().x && m.getPosition(*name).x<oppGrid.getPosition().x+380 && m.getPosition(*name).y>oppGrid.getPosition().y && m.getPosition(*name).y<oppGrid.getPosition().y+380)
-                    {
-                        cout <<"trial: "<<(m.getPosition(*name).y-60)/38<< ", "<<(m.getPosition(*name).x-470)/38<<endl;
-                        
-                        this->play.attack((m.getPosition(*name).y-60)/38,(m.getPosition(*name).x-470)/38);
-        
-                        if(this->play.missed())
-                            playerT=false;
-                    }
-                }
-                
-                if(!playerT)
-                {
-                    if(S->difficulty=='H')
-                        comp.CattackH();
-                    
-                    else if(S->difficulty=='M')
-                        comp.CattackM();
-                    
-                    else comp.CattackL();
-                    
-                    if(this->comp.missed())
-                        playerT=true;
-                }
-                
                 break;
-                
-                // case ....
-                
         }
     }
     
@@ -174,6 +169,19 @@ bool GameW :: handleEvents()
 
 void GameW :: update()
 {
+    if(!playerT)
+    {
+        if(S->difficulty=='H')
+            comp.CattackH();
+        
+        else if(S->difficulty=='M')
+            comp.CattackM();
+        
+        else comp.CattackL();
+        
+        if(this->comp.missed())
+            playerT=true;
+    }
     // animations not linked to the user
-
+    
 }

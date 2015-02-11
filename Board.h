@@ -44,6 +44,8 @@ public:
     // draw
     void drawB (RenderWindow *);
     void debug ();
+    
+    bool withinBoundaries(int, int);
 private:
     Cell B[10][10];  // 2D array
     Ship SH[10]; // ships belonging to the board

@@ -37,6 +37,8 @@ public:
     // booleans
     bool isH(); //is horizontal
     bool operator = (Ship &);
+    
+    void hitShip();
 private:
     
     bool sunk;

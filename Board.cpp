@@ -109,7 +109,6 @@ bool Board :: placeShip(int row, int col, int num)
                 B[row+i][col].placeShip(p);
             }
         
-        cout << row << "," << col << endl;
         p->setPosition(row, col);
     }
     
@@ -177,6 +176,7 @@ void Board :: initializeR() // initializes the board with ships randomly placed
             
         } while (!valid);
         
+        
         SH[w].setPosition(r, c);
         
     }
@@ -217,21 +217,31 @@ void Board :: attack (int row, int col) // attacks a cell with the row and colum
         Ship * ship;
         ship=B[row][col].getShip();
         
+        row = (ship->getPosition()).first.first;
+        col = (ship->getPosition()).first.second;
+        
         if (ship->isH())
         {
             for (int i=-1; i<2; i++)
                 for (int j=-1; j<ship->getSize()+1; j++)
-                    if(!B[row+i][col+j].hasShip())
+                    if(withinBoundaries( row + i, col + j))
+                        //if(!B[row+i][col+j].isHit())
                         B[row+i][col+j].hitCell();
         }
         else
         {
             for (int i=-1; i<ship->getSize()+1; i++)
                 for (int j=-1; j<2; j++)
-                    if(!B[row+i][col+j].hasShip())
+                    if(withinBoundaries(row + i, col + j))
+                        //if(!B[row+i][col+j].isHit())
                         B[row+i][col+j].hitCell();
         }
     }
+}
+
+bool Board :: withinBoundaries(int i, int j)
+{
+    return(i>=0 && i<=9 && j>=0 && j<= 9);
 }
 
 void Board:: attack (Cell * p)
@@ -243,19 +253,24 @@ void Board:: attack (Cell * p)
         Ship * ship;
         ship=B[p->getPosition().second][p->getPosition().first].getShip();
         
+        int row = (ship->getPosition()).first.first;
+        int col = (ship->getPosition()).first.second;
+        
         if (ship->isH())
         {
             for (int i=-1; i<2; i++)
                 for (int j=-1; j<ship->getSize()+1; j++)
-                    if(!B[p->getPosition().second+i][p->getPosition().first+j].hasShip())
-                        B[p->getPosition().second+i][p->getPosition().first+j].hitCell();
+                    if(withinBoundaries( row + i, col + j))
+                        //if(!B[row+i][col+j].isHit())
+                        B[row+i][col+j].hitCell();
         }
         else
         {
             for (int i=-1; i<ship->getSize()+1; i++)
                 for (int j=-1; j<2; j++)
-                    if(!B[p->getPosition().second+i][p->getPosition().first+j].hasShip())
-                        B[p->getPosition().second+i][p->getPosition().first+j].hitCell();
+                    if(withinBoundaries(row + i, col + j))
+                        //if(!B[row+i][col+j].isHit())
+                        B[row+i][col+j].hitCell();
         }
     }
     

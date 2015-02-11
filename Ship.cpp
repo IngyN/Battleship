@@ -85,7 +85,7 @@ Ship ::~Ship()
 
 bool Ship :: shipSunk()
 {
-    return (numberHits == size);
+    return (numberHits >= size);
 }
 
 // Setters

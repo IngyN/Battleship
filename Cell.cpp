@@ -64,7 +64,9 @@ void Cell :: hitCell() // attack the ship and update the boolean "hit" update mi
     
     else
     {
-       cellSprite.setTexture(shipHitTexture);
+        cout << "Cell has ship!" << endl;
+        miss = false;
+        cellSprite.setTexture(shipHitTexture);
         s->hitShip();
     }
 }
@@ -91,7 +93,7 @@ bool Cell :: shipSunk () // return true if the ship the cell contains is sunk
     if(s != NULL)
         return(s->shipSunk());
     else{
-      //  cout << "error s is null!!!" << endl;
+        //cout << "error s is null!!!" << endl;
         return false;
     }
 }

@@ -23,7 +23,7 @@ Settings::Settings ()
     
     cursorTexture.loadFromFile(cursorPathE);
     
-    this->difficulty='M';
+    this->difficulty='H';
     
 }
 Settings::~Settings ()

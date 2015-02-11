@@ -29,7 +29,8 @@ public:
 private:
     Settings* set;
     RenderWindow * name;
-    
+    Font mainFont;
+    Text windowTitle;
     // member for every drawable object
     
     Sprite playerGrid;

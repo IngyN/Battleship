@@ -8,6 +8,8 @@
 
 #include "Initialize.h"
 #include "ResourcePath.hpp"
+#include "Settings.h"
+#include <fstream>
 
 Initialize :: Initialize (RenderWindow * w, Settings * S)
 {
@@ -29,8 +31,36 @@ void Initialize :: initialize()
     gridTexture.loadFromFile(resourcePath() + "/board.png"); //("/Users/Ingy/Downloads/board.png");
     
     playerGrid.setTexture(gridTexture);
-    playerGrid.setPosition(120,60);
     playerGrid.setScale(1.5, 1.5);
+    playerGrid.setPosition(name->getSize().x/2-gridTexture.getSize().x,name->getSize().y/3-gridTexture.getSize().y);
+    
+    mainFont=set->overallFont;
+    
+    string titleTextE = resourcePath() + "InitializeE";
+    string titleTextF = resourcePath() + "InitializeF";
+    ifstream titleSt;
+    string title;
+    
+    if(set->language=="English") // Load from English file
+    {
+        titleSt.open(titleTextE.c_str());
+        
+        getline(titleSt,title);
+        windowTitle.setString(title);
+    
+        
+    }
+    
+    if(set->language=="French") // Load from French file
+    {
+        titleSt.open(titleTextF.c_str());
+        
+        getline(titleSt,title);
+        windowTitle.setString(title);
+    }
+    
+    
+    
 }
 
 void Initialize :: gameloop()

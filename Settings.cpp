@@ -26,6 +26,7 @@ Settings::Settings ()
     this->difficulty='H';
     
 }
+
 Settings::~Settings ()
 {
     

@@ -49,6 +49,10 @@ private:
     // top.second = colTop (x coordinate)
     pair <int,int> top, bottom;
     
+    // Sprites and textures
+    Sprite shipSprite;
+    
+    Texture textures[4];
     
 };
 

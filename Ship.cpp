@@ -7,6 +7,7 @@
 //
 
 #include "Ship.h"
+#include "ResourcePath.hpp"
 
 Ship ::Ship()
 {
@@ -31,6 +32,12 @@ Ship ::Ship()
         bottom.second=top.second;
     }
     
+    
+    textures[0].loadFromFile (resourcePath()+"submarine.png");
+    textures[1].loadFromFile (resourcePath()+"destroyer.png");
+    textures[2].loadFromFile (resourcePath()+"cruiser.png");
+    textures[3].loadFromFile (resourcePath()+"battleship.png");
+    
 }
 
 Ship :: Ship (Ship& rhs)
@@ -41,6 +48,12 @@ Ship :: Ship (Ship& rhs)
     this->numberHits=rhs.numberHits;
     this->horizontal=rhs.horizontal;
     this->bottom=rhs.bottom;
+    
+    
+    textures[0].loadFromFile (resourcePath()+"submarine.png");
+    textures[1].loadFromFile (resourcePath()+"destroyer.png");
+    textures[2].loadFromFile (resourcePath()+"cruiser.png");
+    textures[3].loadFromFile (resourcePath()+"battleship.png");
 }
 
 bool Ship::  operator = (Ship & rhs)
@@ -77,6 +90,12 @@ Ship ::Ship(int size)
         bottom.first=top.first+size-1;
         bottom.second=top.second;
     }
+    
+    
+    textures[0].loadFromFile (resourcePath()+"submarine.png");
+    textures[1].loadFromFile (resourcePath()+"destroyer.png");
+    textures[2].loadFromFile (resourcePath()+"cruiser.png");
+    textures[3].loadFromFile (resourcePath()+"battleship.png");
 }
 
 Ship ::~Ship()
@@ -93,6 +112,8 @@ bool Ship :: shipSunk()
 void Ship :: setSize(int sizeN)
 {
     this->size=sizeN;
+    
+    
 }
 
 void Ship :: setPosition(int rowTop,int colTop,int rowBottom,int colBottom)

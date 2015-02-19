@@ -32,7 +32,7 @@ void GameW :: initialize()
     playerT=true;
     
     // read settings from file / music/ theme/ difficulty
-    backTexture.loadFromFile(resourcePath()+"background2.png");
+    backTexture.loadFromFile(resourcePath()+"background8.png");
     backImage.setTexture(backTexture);
     
     gridTexture.loadFromFile(resourcePath()+"board.png");

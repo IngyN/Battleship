@@ -32,7 +32,7 @@ void GameW :: initialize()
     playerT=true;
     
     // read settings from file / music/ theme/ difficulty
-    backTexture.loadFromFile(resourcePath()+"background8.png");
+    backTexture.loadFromFile(resourcePath()+"background9.png");
     backImage.setTexture(backTexture);
     
     gridTexture.loadFromFile(resourcePath()+"board.png");
@@ -104,8 +104,11 @@ void GameW:: renderScreen()
     name->draw(oppGrid);
     name->draw(playerGrid);
     
-    this->computerB.drawB(name);
-    this->playerB.drawB(name);
+    this ->computerB.unDraw();
+    this ->playerB.unDraw();
+    
+    this->computerB.drawB(name, true);
+    this->playerB.drawB(name, false);
     
     //    cout << "PLAYER" <<endl<<endl;
     //    playerB.debug();
@@ -145,8 +148,6 @@ bool GameW :: handleEvents()
                     }
                 }
                 
-
-                
                 break;
                 
                 // case ....
@@ -182,6 +183,12 @@ void GameW :: update()
         if(this->comp.missed())
             playerT=true;
     }
+    
+    if(computerB.isFinished()||playerB.isFinished())
+    {
+        // window gameOver
+    }
+    
     // animations not linked to the user
     
 }

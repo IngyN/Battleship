@@ -39,11 +39,15 @@ public:
     bool operator = (Ship &);
     
     void hitShip();
+    void drawShip(RenderWindow *, bool);
+    void unDrawn ();
+    
 private:
     
     bool sunk;
     bool horizontal;
     int size, numberHits;
+    bool drawn;
     
     // top.first = rowTop (y coordinate)
     // top.second = colTop (x coordinate)

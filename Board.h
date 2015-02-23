@@ -42,7 +42,8 @@ public:
     Cell* leftCell(Cell *);
     
     // draw
-    void drawB (RenderWindow *);
+    void drawB (RenderWindow *, bool);
+    void unDraw();
     void debug ();
     
     bool withinBoundaries(int, int);

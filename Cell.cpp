@@ -24,7 +24,7 @@ Cell :: Cell()
     
     this->shipTexture.loadFromFile(textureSource);
     
-    string textureSource1= resourcePath()+ "ship2.png";
+    string textureSource1= resourcePath()+ "cross1.png";
     
     this->shipHitTexture.loadFromFile(textureSource1);
     
@@ -64,7 +64,6 @@ void Cell :: hitCell() // attack the ship and update the boolean "hit" update mi
     
     else
     {
-        cout << "Cell has ship!" << endl;
         miss = false;
         cellSprite.setTexture(shipHitTexture);
         s->hitShip();

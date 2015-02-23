@@ -339,11 +339,21 @@ Cell* Board::leftCell(Cell * p)
         return NULL;
 }
 
-void Board:: drawB(RenderWindow * n)
+void Board:: drawB(RenderWindow * n, bool comp)
 {
     for (int i=0; i<10; i++)
+        SH[i].drawShip(n, comp);
+    
+    for (int i=0; i<10; i++)
         for (int j=0; j<10; j++)
-            B[i][j].drawC(n);
+            if(B[i][j].isHit())B[i][j].drawC(n);
+    
+}
+
+void Board :: unDraw()
+{
+    for (int i=0; i<10; i++)
+        SH[i].unDrawn();
 }
 
 void Board:: debug()

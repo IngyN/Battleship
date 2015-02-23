@@ -31,8 +31,10 @@ private:
     Settings * S;
     RenderWindow * name;
     
+    
     Font pageFont;
     Text title;
+    Text backText;
     string textSource;
     
     Texture backTexture;

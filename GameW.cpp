@@ -9,6 +9,7 @@
 #include "GameW.h"
 #include <fstream>
 #include "ResourcePath.hpp"
+#include "GameOver.h"
 
 GameW :: GameW (RenderWindow * w, Settings * S) : computerB(true), playerB(false), comp(S, &playerB, &computerB), play(*S, &playerB, &computerB)
 {
@@ -187,6 +188,7 @@ void GameW :: update()
     if(computerB.isFinished()||playerB.isFinished())
     {
         // window gameOver
+        GameOver(this->name, this->S, computerB.isFinished());
     }
     
     // animations not linked to the user

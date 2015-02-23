@@ -21,8 +21,16 @@ GameOver :: GameOver (RenderWindow * w, Settings * S, bool won)
             textSource=resourcePath()+"GameOverTextWonE.txt";
         else if (S->language=="French")
             textSource=resourcePath()+"GameOverTextWonF.txt";
-        else if (S->language=="Arabic")
-            textSource=resourcePath()+"GameOverTextWonA.txt";
+        //  else if (S->language=="Arabic")
+        //      textSource=resourcePath()+"GameOverTextWonA.txt";
+    }
+    else{
+        if (S->language=="English")
+            textSource=resourcePath()+"GameOverTextLostE.txt";
+        else if (S->language=="French")
+            textSource=resourcePath()+"GameOverTextLostF.txt";
+        // else if (S->language=="Arabic")
+        //   textSource=resourcePath()+"GameOverTextWonA.txt";
     }
     initialize();
     gameloop();
@@ -45,65 +53,45 @@ void GameOver :: initialize()
     ifstream in;
     
     pageFont=S->overallFont;
+    string temp;
     
-//    if (S->language== "English")
-//    {
-//        // open english
-//        in.open(RULES_E);
-//        title.setFont(pageFont);
-//        title.setCharacterSize(50);
-//        title.setString("RULES");
-//        title.setPosition((name->getSize().x)/2-120, 100);
-//        title.setColor(Color(10,15,80));
-//        
-//        backText.setFont(pageFont);
-//        backText.setCharacterSize(40);
-//        backText.setString("BACK");
-//        backText.setPosition(90,50);
-//        backText.setColor(Color(10,15,80));
-//        
-//        
-//    }
-//    else if(S->language== "French")
-//    {
-//        in.open(RULES_F);
-//        title.setFont(pageFont);
-//        title.setCharacterSize(50);
-//        title.setString(L"RÈGLES DU JEU");
-//        title.setPosition((name->getSize().x)/2-120, 100);
-//        title.setColor(Color(10,15,80));
-//        
-//        backText.setFont(pageFont);
-//        backText.setCharacterSize(40);
-//        backText.setString("REVENIR");
-//        backText.setPosition(90,50);
-//        backText.setColor(Color(10,15,80));
-//    }
+    if (S->language== "English")
+    {
+        // open english
+        in.open(textSource.c_str());
+        getline (in, temp);
+        
+        backText.setString("BACK");
+        
+    }
+    else if(S->language== "French")
+    {
+        in.open(textSource.c_str());
+        getline (in, temp);
+        
+        backText.setString("REVENIR");
+        
+    }
     
-    // Getting the text
+    title.setFont(pageFont);
+    title.setCharacterSize(50);
+    title.setString(temp);
+    title.setPosition((name->getSize().x)/2-180, 100);
+    title.setColor(Color(10,15,80));
     
-//    string temp;
-//    getline (in, temp);
-//    do
-//    {
-//        for(int i=0; i<temp.size(); i++)
-//            if(isalpha(temp[i]))
-//                temp[i]=toupper(temp[i]);
-//        
-//        rules.push_back(Text(temp, pageFont));
-//        getline (in, temp);
-//        
-//    }while(temp!="END");
-    
+    backText.setPosition(90,50);
+    backText.setColor(Color(10,15,80));
+    backText.setFont(pageFont);
+    backText.setCharacterSize(40);
     in.close();
-
     
-//    cursorTexture=this->S->cursorTexture;
-//    cursor.setTexture(cursorTexture);
-//    cursor.setPosition(50,backText.getPosition().y+5);
-//    cursor.setScale(0.42, 0.38);
-//    cursorXpos = cursor.getPosition().x;
-//    cursorYpos =cursor.getPosition().y; // text +5
+    
+    //    cursorTexture=this->S->cursorTexture;
+    //    cursor.setTexture(cursorTexture);
+    //    cursor.setPosition(50,backText.getPosition().y+5);
+    //    cursor.setScale(0.42, 0.38);
+    //    cursorXpos = cursor.getPosition().x;
+    //    cursorYpos =cursor.getPosition().y; // text +5
 }
 
 void GameOver :: gameloop()
@@ -127,9 +115,9 @@ void GameOver:: renderScreen()
     
     //Text
     name->draw(title);
-    
+    name->draw(backText);
     //cursor
-//    name->draw(cursor);
+    //    name->draw(cursor);
     this->name->display();
 }
 
@@ -151,7 +139,7 @@ bool GameOver :: handleEvents()
                 {
                     flag=false;
                 }
-
+                
                 break;
                 
                 // case ....

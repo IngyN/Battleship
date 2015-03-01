@@ -35,9 +35,9 @@ int main()
     Settings * S= new Settings;
     S->language="English";
     
-   //Welcome myWindow(w,S);
+   Welcome myWindow(w,S);
     
-   GameW myGame(w,S);
+   //GameW myGame(w,S);
 
     system("pause");
     return 0;

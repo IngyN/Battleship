@@ -27,7 +27,7 @@ public:
     void gameloop();
     bool handleEvents();
     void renderScreen();
-    void update();
+    bool update();
     
 private:
     

@@ -18,8 +18,6 @@ GameW :: GameW (RenderWindow * w, Settings * S) : computerB(true), playerB(false
     
     initialize();
    
-
-    
     gameloop();
     
 }
@@ -91,7 +89,7 @@ void GameW :: gameloop()
     while (name->isOpen() && flag)
     {
         flag=handleEvents();
-        update();
+        flag=update();
         renderScreen();
     }
 }
@@ -169,8 +167,9 @@ bool GameW :: handleEvents()
     return flag;
 }
 
-void GameW :: update()
+bool GameW :: update()
 {
+    bool flag =true;
     if(!playerT)
     {
         if(S->difficulty=='H')
@@ -189,8 +188,10 @@ void GameW :: update()
     {
         // window gameOver
         GameOver(this->name, this->S, computerB.isFinished());
+        flag=false;
     }
     
+    return flag;
     // animations not linked to the user
     
 }
